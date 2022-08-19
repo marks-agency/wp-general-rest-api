@@ -18,6 +18,7 @@ require __DIR__ . '/vendor/autoload.php';
 */
 
 use Routes\UserRoute;
+use Routes\PostRoute;
 use Routes\PingRoute;
 use Plugins\JWT\JWTPlugin;
 
@@ -26,11 +27,11 @@ function wp_general_rest_api_init(){
   // definindo a name-space
   $name_space = "wp-general-rest-api/v1";
 
-  $novoUser =  new UserRoute($name_space);
-  $ping   = new PingRoute($name_space);
+  // init all route 
+  (new UserRoute($name_space))->initRoutes();
+  (new PingRoute($name_space))->initRoutes();
+  (new PostRoute($name_space))->initRoutes();
 
-  $ping->initRoutes();
-  $novoUser->initRoutes();
 
   // pre hendler
   //add_filter('rest_pre_dispatch','oi_mark_api_rest_pre_dispatchi',10,3);

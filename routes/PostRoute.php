@@ -19,17 +19,17 @@ class PostRoute{
   *
   */
 
-  function posts(){
+  function post(){
     
     register_rest_route(
       $this->name, 
-      '/user/login',
+      '/post',
       array(
         array(
-          'methods'  => 'POST',
-          'callback' => array(new UserController,'login'),
+          'methods'  => 'GET',
+          'callback' => array(new PostController,'post'),
           'permission_callback' =>  '__return_true',  
-          'args' => (new PostSchema())->login(),
+          'args' => (new PostSchema())->post(),
         ),
   
       )
@@ -39,7 +39,7 @@ class PostRoute{
 
 
   public function initRoutes(){
-    $this->posts();
+    $this->post();
   }
 
   

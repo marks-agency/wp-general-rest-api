@@ -10,7 +10,7 @@ class PostSchema{
   *
   */
  
-  function posts(){
+  function post(){
     
     $schema = array(
 
