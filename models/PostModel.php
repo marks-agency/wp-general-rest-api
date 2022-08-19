@@ -13,9 +13,15 @@ class PostModel{
   *
   */
 
-   public function post(){
+   public function post($offset, $numberOfRecordsPerPage){
         
-        $posts =   new WP_Query(array('post_type'=>'markform'));
+
+        $posts =   new WP_Query(array(
+                'post_type'=>'markform',
+                'posts_per_page' =>$numberOfRecordsPerPage,
+                "paged"=>$offset
+        ));
+
         $markformPosts = [];
 
         while($posts->have_posts()){
@@ -37,14 +43,15 @@ class PostModel{
                 $markformPosts[] = $singlePost;
         }
 
-        $info = [];
-        $info["count"] = wp_count_posts('markform')->publish;
-
+       /* $info = [];
+        $info["count"] = $totalOfRows;
+        $info["pages"] = $totalOfPages;
+        
         $results = [];
         $results["info"] = $info;
-        $results["results"] = $markformPosts;
+        $results["results"] = ;*/
         
-        return  $results;
+        return  $markformPosts;
    }
 
    private function countNumberOfBreafingByID($ID){
@@ -53,5 +60,17 @@ class PostModel{
         return $result[0]->ChildCount;
    }
 
-
+   public function paginationInfo(){
+        
+        $numberOfRecordsPerPage = 2;
+        $totalOfRows = wp_count_posts('markform')->publish;
+        $totalOfPages = ceil($totalOfRows/$numberOfRecordsPerPage);
+        //$offset  = ($page - 1) * $numberOfRecordsPerPage;
+        
+        $result["number_of_records_per_page"] = $numberOfRecordsPerPage;
+        $result["total_of_rows"] =  $totalOfRows;
+        $result["total_of_pages"] = $totalOfPages;
+        
+        return $result;
+   } 
 }

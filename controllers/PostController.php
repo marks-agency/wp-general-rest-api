@@ -19,10 +19,27 @@ class PostController
 
   public function post($request)
   {
-    
-    $posts = $this->postModel->post();
+    $page = 1;
 
-    return  rest_ensure_response($posts);
+    $paginationInfo = $this->postModel->paginationInfo();
+    //;
+
+    $offset  = ($page - 1) *  $paginationInfo["number_of_records_per_page"];
+
+    $posts = $this->postModel->post($offset, $paginationInfo["number_of_records_per_page"]);
+
+
+    $info = [];
+    $info["count"] = $paginationInfo["total_of_rows"];
+    $info["pages"] = $paginationInfo["total_of_pages"];
+
+    $results = [];
+
+    $results["info"] = $info;
+
+    $results["results"] =  $posts;
+
+    return  rest_ensure_response($results);
 
   }
 
