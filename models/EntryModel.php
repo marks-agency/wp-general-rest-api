@@ -15,12 +15,21 @@ class EntryModel{
 
    public function entries($offset, $numberOfRecordsPerPage){
      global $wpdb;
-     $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."oi_markform_entries ORDER BY created_at DESC LIMIT ".$offset.",".$numberOfRecordsPerPage,OBJECT);
+     $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."oi_markform_entries ORDER BY id DESC LIMIT ".$offset.",".$numberOfRecordsPerPage,OBJECT);
      
-     $entries = []
-     foreach($oi_mark_api_array_result as $key => $value){
+     $entries = [];
+
+     foreach($results as $key => $value){
+         
+          $entry = json_decode(json_encode($value), true);
+
+          $entry["user_data"] =  $this->getUserInfoByID($value->user_id);
+          $entry["post"] =  $this->getPostInfoById($value->form_id);
+
+          $entries[] = $entry;
 
      }
+
      return  $entries;
    }
 
@@ -43,4 +52,39 @@ class EntryModel{
         
         return $result;
    } 
+
+   public function getPostInfoById($id){
+     
+     $myPost = wp_get_single_post($id);
+     
+     if(empty($myPost )){
+          return ;
+     }
+
+     $postValues = [];
+     $postValues['post_title'] = $myPost->post_title;
+     $postValues['post_name'] = $myPost->post_name;
+     $postValues['post_type'] = $myPost->post_type;
+
+     return $postValues;
+
+   }
+
+   public function getUserInfoByID($id){
+     
+     if(empty($id)){
+        return [] ; 
+     }
+
+     $user = get_user_by('ID',$id);
+     
+     $userInfo  = [];
+
+     $userInfo["user_name"] =  $user->display_name;
+     $userInfo["user_email"] =  $user->user_email;
+
+     return  $userInfo;
+
+   }
+
 }
