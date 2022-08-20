@@ -17,6 +17,10 @@ require __DIR__ . '/vendor/autoload.php';
 * Text Domain:       https://oimark.com.br/
 */
 
+define('MARKFORM_PLUGIN_URL_REST_API', __FILE__);
+
+
+// 
 use Routes\UserRoute;
 use Routes\PostRoute;
 use Routes\PingRoute;
@@ -24,6 +28,12 @@ use Routes\EntryRoute;
 use Routes\EntryMetaRoute;
 use Plugins\JWT\JWTPlugin;
 
+
+// DataBase
+use Database\DatabaseInstaller;
+
+
+// call all route
 
 function wp_general_rest_api_init(){
   // definindo a name-space
@@ -43,9 +53,19 @@ function wp_general_rest_api_init(){
 
 }
 
+
+// create table on install plugin
+function wp_general_rest_api_installer(){
+  
+  (new DatabaseInstaller())->install();
+
+}
+
 function oi_mark_api_rest_pre_dispatchi($url, $server, $request){}
 
 
-add_action('rest_api_init','wp_general_rest_api_init');
+// Hooks 
+register_activation_hook(MARKFORM_PLUGIN_URL_REST_API, 'wp_general_rest_api_installer');
+add_action('rest_api_init','wp_general_rest_api_installer');
 //add_action('rest_api_init', array('JWTPlugin','login'));
 //add_action('init', 'oi_mark_api_init');
