@@ -36,9 +36,27 @@ class EntryRoute{
 
   }
 
+  function postEntryByIdPagination(){
+    
+    register_rest_route(
+      $this->name, 
+      'posts/(?P<form_id>[0-9]+)/entries/page/(?P<page_number>[0-9]+)',
+      array(
+        array(
+          'methods'  => 'GET',
+          'callback' => array(new EntryController,'postEntryByIdPagination'),
+          'permission_callback' =>  '__return_true',  
+          'args' => (new PostSchema())->post(),
+        ),
+      )
+    );
+
+  }
+
 
   public function initRoutes(){
     $this->postEntry();
+    $this->postEntryByIdPagination();
   }
 
   

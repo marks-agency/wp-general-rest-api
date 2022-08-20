@@ -33,16 +33,39 @@ class EntryModel{
      return  $entries;
    }
 
+
+   public function postEntryByIdPagination($form_id, $offset, $numberOfRecordsPerPage){
+
+     global $wpdb;
+     $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."oi_markform_entries  WHERE form_id = $form_id ORDER BY id DESC LIMIT ".$offset.",".$numberOfRecordsPerPage,OBJECT);
+     
+     $entries = [];
+
+     foreach($results as $key => $value){
+         
+          $entry = json_decode(json_encode($value), true);
+
+          $entry["user_data"] =  $this->getUserInfoByID($value->user_id);
+          $entry["post"] =  $this->getPostInfoById($value->form_id);
+
+          $entries[] = $entry;
+
+     }
+
+     return  $entries;
+
+   }
+
    private function countNumberOfBreafingByID($ID){
         global $wpdb;
         $result = $wpdb->get_results("SELECT count(*) as ChildCount FROM ".$wpdb->prefix."oi_markform_entries WHERE form_id = $ID ");
         return $result[0]->ChildCount;
    }
 
-   public function paginationInfo(){
+   public function paginationInfo($form_id){
         
         $numberOfRecordsPerPage = 10;
-        $totalOfRows = wp_count_posts('markform')->publish;
+        $totalOfRows = $this->countNumberOfBreafingByID($form_id);
         $totalOfPages = ceil($totalOfRows/$numberOfRecordsPerPage);
         //$offset  = ($page - 1) * $numberOfRecordsPerPage;
         

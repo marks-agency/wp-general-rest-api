@@ -30,6 +30,37 @@ class EntryController
 
   }
 
+  public function postEntryByIdPagination($request){
+
+    $form_id = $request['form_id'];
+    $page_number = $request['page_number'];
+
+
+    $page =  $page_number;
+    $numberOfRecordsPerPage = 10;
+    $offset  = ($page - 1) * $numberOfRecordsPerPage;
+
+    $entries = $this->entryModel->postEntryByIdPagination($form_id, $offset, $numberOfRecordsPerPage);
+    
+    if(empty($entries)){
+      return  rest_ensure_response([]);
+    } 
+    
+    $paginationInfo = $this->entryModel->paginationInfo($form_id);
+
+    $info = [];
+    $info["count"] = $paginationInfo["total_of_rows"];
+    $info["pages"] = $paginationInfo["total_of_pages"];
+
+    $results = [];
+
+    $results["info"] = $info;
+
+    $results["results"] = $entries;
+    
+    return  rest_ensure_response($results);
+  }
+
   public function user($request)
   {
     //return rest_ensure_response($result);
