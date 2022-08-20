@@ -46,7 +46,7 @@ class EntryController
       return  rest_ensure_response([]);
     } 
     
-    $paginationInfo = $this->entryModel->paginationInfo($form_id);
+    $paginationInfo = $this->entryModel->paginationInfo($form_id,  $numberOfRecordsPerPage);
 
     $info = [];
     $info["count"] = $paginationInfo["total_of_rows"];
