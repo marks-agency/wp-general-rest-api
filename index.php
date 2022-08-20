@@ -20,6 +20,7 @@ require __DIR__ . '/vendor/autoload.php';
 use Routes\UserRoute;
 use Routes\PostRoute;
 use Routes\PingRoute;
+use Routes\EntryRoute;
 use Plugins\JWT\JWTPlugin;
 
 
@@ -31,7 +32,8 @@ function wp_general_rest_api_init(){
   (new UserRoute($name_space))->initRoutes();
   (new PingRoute($name_space))->initRoutes();
   (new PostRoute($name_space))->initRoutes();
-
+  (new EntryRoute($name_space))->initRoutes();
+  
 
   // pre hendler
   //add_filter('rest_pre_dispatch','oi_mark_api_rest_pre_dispatchi',10,3);

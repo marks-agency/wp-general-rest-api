@@ -3,10 +3,10 @@
 namespace Routes;
 use WP_Error;
 
-use Controllers\PostController;
+use Controllers\EntryController;
 use Schema\PostSchema;
 
-class PostRoute{
+class EntryRoute{
 
   protected $name; 
 
@@ -19,19 +19,18 @@ class PostRoute{
   *
   */
 
-  function post(){
+  function postEntry(){
     
     register_rest_route(
       $this->name, 
-      '/posts',
+      '/entries',
       array(
         array(
           'methods'  => 'GET',
-          'callback' => array(new PostController,'post'),
+          'callback' => array(new EntryController,'entries'),
           'permission_callback' =>  '__return_true',  
           'args' => (new PostSchema())->post(),
         ),
-  
       )
     );
 
@@ -39,7 +38,7 @@ class PostRoute{
 
 
   public function initRoutes(){
-    $this->post();
+    $this->postEntry();
   }
 
   

@@ -19,7 +19,8 @@ class PostModel{
         $posts =   new WP_Query(array(
                 'post_type'=>'markform',
                 'posts_per_page' =>$numberOfRecordsPerPage,
-                "paged"=>$offset
+                "paged"=>$offset,
+                'post_status'            => array( 'publish' ),
         ));
 
         $markformPosts = [];
@@ -42,14 +43,6 @@ class PostModel{
 
                 $markformPosts[] = $singlePost;
         }
-
-       /* $info = [];
-        $info["count"] = $totalOfRows;
-        $info["pages"] = $totalOfPages;
-        
-        $results = [];
-        $results["info"] = $info;
-        $results["results"] = ;*/
         
         return  $markformPosts;
    }
@@ -62,7 +55,7 @@ class PostModel{
 
    public function paginationInfo(){
         
-        $numberOfRecordsPerPage = 2;
+        $numberOfRecordsPerPage = 10;
         $totalOfRows = wp_count_posts('markform')->publish;
         $totalOfPages = ceil($totalOfRows/$numberOfRecordsPerPage);
         //$offset  = ($page - 1) * $numberOfRecordsPerPage;
