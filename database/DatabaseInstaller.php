@@ -4,6 +4,8 @@ namespace Database;
 
 use Database\UsersTokensTable;
 use Database\NotificationTypeTable;
+use Database\NotificationSubscriptionTable;
+
 
 class DatabaseInstaller{
 
@@ -17,6 +19,7 @@ class DatabaseInstaller{
     
     (new UsersTokensTable())->createTable();
     (new NotificationTypeTable())->createTable();
+    (new NotificationSubscriptionTable())->createTable();
     
 
   }
