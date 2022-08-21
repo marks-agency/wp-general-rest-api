@@ -6,6 +6,7 @@ use Models\UserModel;
 
 use Plugins\JWT\JWTPlugin;
 
+use WP_Error;
 class UserController
 {
   private $userModel;
@@ -31,6 +32,13 @@ class UserController
       return rest_ensure_response($user);
     }
 
+    $userData = get_userdata( $user->ID);
+
+    if ( !in_array( 'administrator',$userData->roles, true ) ) {
+      // Do something.
+      return new WP_Error( 'rest_forbidden', esc_html__( 'OMG you can not view private data.', 'my-text-domain' ), array( 'status' => 401 ) );
+    }
+
     $token = $this->JWTPlugin->generateToken($user->data->ID);
 
     $data = array(
@@ -45,9 +53,9 @@ class UserController
     return rest_ensure_response($data);
   }
 
-  public function user($request)
+  public function userMe($request)
   {
     //return rest_ensure_response($result);
-    return rest_ensure_response($this->userModel->user());
+    return rest_ensure_response($this->userModel->userMe());
   }
 }
