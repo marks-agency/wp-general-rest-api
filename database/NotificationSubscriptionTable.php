@@ -22,7 +22,8 @@ class NotificationSubscriptionTable{
         enabled BOOLEAN, 
         PRIMARY KEY(id),
         FOREIGN KEY(user_token_id) REFERENCES ".$wpdb->prefix."oi_markform_users_tokens(id),
-        FOREIGN KEY(notification_type_id) REFERENCES ".$wpdb->prefix."oi_markform_notification_type(id) 
+        FOREIGN KEY(notification_type_id) REFERENCES ".$wpdb->prefix."oi_markform_notification_type(id), 
+        UNIQUE(user_token_id, notification_type_id) 
     )".$wpdb->get_charset_collate();  
 
     dbDelta($sql);
