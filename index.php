@@ -48,7 +48,6 @@ function wp_general_rest_api_init(){
   
 
   // pre hendler
-  //add_filter('rest_pre_dispatch','oi_mark_api_rest_pre_dispatchi',10,3);
   add_filter('rest_pre_dispatch',[new JWTPlugin,'validateTokenRestPreDispatch'],10,3);
 
 }
@@ -66,6 +65,4 @@ function oi_mark_api_rest_pre_dispatchi($url, $server, $request){}
 
 // Hooks 
 register_activation_hook(MARKFORM_PLUGIN_URL_REST_API, 'wp_general_rest_api_installer');
-add_action('rest_api_init','wp_general_rest_api_installer');
-//add_action('rest_api_init', array('JWTPlugin','login'));
-//add_action('init', 'oi_mark_api_init');
+add_action('rest_api_init','wp_general_rest_api_init');

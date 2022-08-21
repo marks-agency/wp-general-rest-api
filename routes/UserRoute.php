@@ -41,11 +41,11 @@ class UserRoute{
     
     register_rest_route(
       $this->name, 
-      '/user',
+      '/user/me',
       array(
         array(
           'methods'  => 'GET',
-          'callback' => array(new UserController,'user'),
+          'callback' => array(new UserController,'userMe'),
           'permission_callback' =>  '__return_true'
         ),
   
