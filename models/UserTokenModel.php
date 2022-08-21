@@ -57,6 +57,25 @@ class UserTokenModel{
   
    }
 
+
+   public function getUserTokenIdByExpoToken($expo_token){
+
+        global $wpdb;
+        
+        $user = wp_get_current_user();
+
+        $result = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."oi_markform_users_tokens WHERE user_id = $user->ID AND expo_token = '$expo_token' ", OBJECT);
+        
+        if(empty($result)){
+
+          return 0;
+
+        }
+
+        return $result[0]->id;
+
+   }
+
   
    
  
