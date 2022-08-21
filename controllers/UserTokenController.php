@@ -26,4 +26,14 @@ class UserTokenController
   }
 
 
+  public function delete($request)
+  {
+
+    $expo_token = $request['expo_token'];
+    $result = $this->userTokenModel->delete($expo_token);
+    return rest_ensure_response($result);
+
+  }
+
+
 }

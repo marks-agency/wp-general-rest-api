@@ -33,6 +33,30 @@ class UserTokenModel{
   
    }
 
+   /*
+  *
+  */
+
+  public function delete($expo_token){
+    
+        global $wpdb;
+        
+        $user = wp_get_current_user();
+        
+        $item = array(
+                "user_id" =>$user->ID,
+                "expo_token" => $expo_token
+                ) ;
+
+        $results = $wpdb->delete(
+                $wpdb->prefix."oi_markform_users_tokens",
+                $item 
+        );
+
+        return  $results;
+  
+   }
+
   
    
  

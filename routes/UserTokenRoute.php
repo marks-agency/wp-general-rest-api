@@ -39,8 +39,25 @@ class UserTokenRoute{
   *
   */
 
+  function delete(){
+    
+    register_rest_route(
+      $this->name, 
+      '/user/expo_token',
+      array(
+        array(
+          'methods'  => "DELETE",
+          'callback' => array(new UserTokenController,'delete'),
+          'permission_callback' =>  '__return_true',  
+        ),
+      )
+    );
+
+  }
+
   public function initRoutes(){
     $this->create();
+    $this->delete();
     
   }
 
