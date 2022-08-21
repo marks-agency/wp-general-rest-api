@@ -21,7 +21,8 @@ class UsersTokensTable{
         user_id BIGINT(20)  UNSIGNED NOT NULL,
         expo_token VARCHAR(100) NOT NULL,
         PRIMARY KEY(id),
-        FOREIGN KEY(user_id) REFERENCES ".$wpdb->prefix."users(ID)
+        FOREIGN KEY(user_id) REFERENCES ".$wpdb->prefix."users(ID),
+        UNIQUE(expo_token)
       )".$wpdb->get_charset_collate();
    
    

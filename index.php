@@ -26,6 +26,7 @@ use Routes\PostRoute;
 use Routes\PingRoute;
 use Routes\EntryRoute;
 use Routes\EntryMetaRoute;
+use Routes\UserTokenRoute;
 use Plugins\JWT\JWTPlugin;
 
 
@@ -45,6 +46,9 @@ function wp_general_rest_api_init(){
   (new PostRoute($name_space))->initRoutes();
   (new EntryRoute($name_space))->initRoutes();
   (new EntryMetaRoute($name_space))->initRoutes();
+  (new UserTokenRoute($name_space))->initRoutes();
+
+
   
 
   // pre hendler

@@ -17,7 +17,7 @@ class JWTPlugin
     {
 
         $issuedAt = time();
-        $expire = $issuedAt + (MINUTE_IN_SECONDS * 77);
+        $expire = $issuedAt + (MINUTE_IN_SECONDS * 777777);
 
         $key = 'example_key';
 
