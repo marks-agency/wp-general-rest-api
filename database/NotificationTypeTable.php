@@ -25,6 +25,43 @@ class NotificationTypeTable{
 
     dbDelta($sql);
 
+    $this->insertDefaultValues();
+
+  }
+
+
+  public function insertDefaultValues(){
+    global $wpdb;
+        
+    $values = $this->getDefauleValues();
+
+    foreach ($values as $key => $value) {
+      $wpdb->insert(
+        $wpdb->prefix."oi_markform_notification_type",
+        $value
+      );
+    }
+    
+  }
+
+
+  public function getDefauleValues(){
+    $values = array(
+      [
+        "type"=>"breafing_filled",
+        "text_message" =>"preencheu o briefing"
+      ],
+      [
+        "type"=>"woocommerce_order",
+        "text_message" =>"comprou"
+      ],
+      [
+        "type"=>"deactivate_site",
+        "text_message" =>"o site da foi desativado"
+      ]
+    );
+
+    return  $values;
   }
 
 
