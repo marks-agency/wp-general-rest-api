@@ -4,7 +4,7 @@ namespace Routes;
 use WP_Error;
 
 use Controllers\NotificationSubscriptionController;
-use Schema\UserSchema;
+use Schema\NotificationSubscriptionchema;
 
 class NotificationSubscriptionRoute{
 
@@ -91,7 +91,8 @@ class NotificationSubscriptionRoute{
         array(
           'methods'  => 'PUT',
           'callback' => array(new NotificationSubscriptionController,'updateEnabledState'),
-          'permission_callback' =>  '__return_true',  
+          'permission_callback' =>  '__return_true', 
+          'args' => (new NotificationSubscriptionchema())->updateEnabledState(),   
         ),
       )
     );
