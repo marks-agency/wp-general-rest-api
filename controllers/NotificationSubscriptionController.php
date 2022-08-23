@@ -71,6 +71,26 @@ class NotificationSubscriptionController
     return rest_ensure_response($results);
   }
 
+
+  public function updateEnabledState($request){
+    
+    $notificationSubscriptionID = intval($request["notification_subscription_id"]);
+    $enabled = $request["enabled"];
+
+    $value = true;
+
+    if ($enabled === 0 ) {
+      $value = false ;
+    } 
+    
+    $results = $this->notificationSubscriptionModel->updateEnabledState($notificationSubscriptionID, $value);
+
+    return rest_ensure_response($results);
+    
+  }
+
+
+  
  
 
 

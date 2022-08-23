@@ -78,11 +78,33 @@ class NotificationSubscriptionRoute{
   }
 
 
+  /*
+  *
+  */
+
+  function updateEnabledState(){
+    
+    register_rest_route(
+      $this->name, 
+      '/notification/subscription/(?P<notification_subscription_id>[0-9]+)/enabled',
+      array(
+        array(
+          'methods'  => 'PUT',
+          'callback' => array(new NotificationSubscriptionController,'updateEnabledState'),
+          'permission_callback' =>  '__return_true',  
+        ),
+      )
+    );
+
+  }
+
+
   public function initRoutes(){
    
     $this->subscribe();
     $this->fetchSubscription();
     $this->unsubscribe();
+    $this->updateEnabledState();
 
   }
 

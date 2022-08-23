@@ -111,5 +111,22 @@ class NotificationSubscriptionModel{
 
   
  
+  public function updateEnabledState($notificationSubscriptionID, $value){
+        
+        global $wpdb;
+        
+        $item = [
+                "enabled" =>  $value
+        ];
+
+        $results = $wpdb->update(
+                $wpdb->prefix."oi_markform_notification_subscription",
+                $item,
+                ["id"=> $notificationSubscriptionID] 
+        );
+
+        return  $results;
+
+  }
 
 }
