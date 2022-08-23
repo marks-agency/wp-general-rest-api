@@ -28,7 +28,8 @@ class NotificationSubscriptionRoute{
         array(
           'methods'  => 'POST',
           'callback' => array(new NotificationSubscriptionController,'subscribe'),
-          'permission_callback' =>  '__return_true',  
+          'permission_callback' =>  '__return_true',
+          'args' => (new NotificationSubscriptionchema())->subscription(),   
         ),
       )
     );
@@ -70,7 +71,8 @@ class NotificationSubscriptionRoute{
         array(
           'methods'  => 'DELETE',
           'callback' => array(new NotificationSubscriptionController,'unsubscribe'),
-          'permission_callback' =>  '__return_true',  
+          'permission_callback' =>  '__return_true',
+          'args' => (new NotificationSubscriptionchema())->subscription(),     
         ),
       )
     );

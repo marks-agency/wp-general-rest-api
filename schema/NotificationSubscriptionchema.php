@@ -32,7 +32,50 @@ class NotificationSubscriptionchema{
 
   }
 
+  function subscription(){
+    
+    $schema = array(
 
+      'expo_token'=>array(
+        'required'    => true,
+        'type'        => 'string',
+        'validate_callback'=> function($value, $request, $key) {
+  
+          return $this->checkIfIsExpoToken($value);
+
+        }
+      ),
+
+
+    );
+
+    return  $schema;
+
+  }
+
+
+  private function checkIfIsExpoToken($value){
+    
+    $results = explode("ExponentPushToken", $value);
+    
+    if(count($results) !== 2){
+      return false;
+    }
+    
+    $expoToken = $results[1];
+
+    if( $expoToken[0] !== '['){
+      return false;
+    }
+
+    $lastPosition = strlen($expoToken);
+
+    if( $expoToken[$lastPosition - 1] !== ']'){
+      return false;
+    }
+
+    return true;
+  }
 
   
 }
