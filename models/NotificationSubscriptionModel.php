@@ -82,7 +82,34 @@ class NotificationSubscriptionModel{
    }
 
   
-   
+  /*
+  *
+  */
+
+  public function getSubscriptionByUserTokenId($userTokenID){
+        global $wpdb;
+
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."oi_markform_notification_subscription WHERE user_token_id = $userTokenID ", OBJECT);
+        
+        return  $results;
+
+  }
+
+
+  /*
+  *
+  */
+  
+  public function unsubscribeByUserTokenId($userTokenID){
+        global $wpdb;
+        
+        $results = $wpdb->get_results("DELETE FROM ".$wpdb->prefix."oi_markform_notification_subscription WHERE user_token_id = $userTokenID ", OBJECT);
+        
+        return  $results;
+
+  }
+
+  
  
 
 }

@@ -4,6 +4,9 @@ namespace Controllers;
 
 use Models\NotificationSubscriptionModel;
 
+use Models\UserTokenModel;
+
+
 use WP_Error;
 class NotificationSubscriptionController
 {
@@ -36,8 +39,39 @@ class NotificationSubscriptionController
 
   }
 
+  public function fetchSubscription($request){
+    
+    $expo_token = $request["expo_token"];
 
 
+    $userTokenId = (new UserTokenModel())->getUserTokenIdByExpoToken($expo_token);
+
+    if(empty($userTokenId)){
+      return rest_ensure_response([]);
+    }
+
+    $results = $this->notificationSubscriptionModel->getSubscriptionByUserTokenId($userTokenId);
+
+    return rest_ensure_response($results);
+  }
+
+  public function unsubscribe($request){
+    
+    $expo_token = $request["expo_token"];
+
+
+    $userTokenId = (new UserTokenModel())->getUserTokenIdByExpoToken($expo_token);
+
+    if(empty($userTokenId)){
+      return rest_ensure_response([]);
+    }
+
+    $results = $this->notificationSubscriptionModel->unsubscribeByUserTokenId($userTokenId);
+
+    return rest_ensure_response($results);
+  }
+
+ 
 
 
 }

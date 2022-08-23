@@ -23,7 +23,7 @@ class NotificationSubscriptionRoute{
     
     register_rest_route(
       $this->name, 
-      '/notification/subscribe/user',
+      '/notification/subscription',
       array(
         array(
           'methods'  => 'POST',
@@ -35,14 +35,55 @@ class NotificationSubscriptionRoute{
 
   }
 
+
+
   /*
   *
   */
 
+  function fetchSubscription(){
+    
+    register_rest_route(
+      $this->name, 
+      '/notification/subscription',
+      array(
+        array(
+          'methods'  => 'GET',
+          'callback' => array(new NotificationSubscriptionController,'fetchSubscription'),
+          'permission_callback' =>  '__return_true',  
+        ),
+      )
+    );
+
+  }
+
+  /*
+  *
+  */
+
+  function unsubscribe(){
+    
+    register_rest_route(
+      $this->name, 
+      '/notification/subscription',
+      array(
+        array(
+          'methods'  => 'DELETE',
+          'callback' => array(new NotificationSubscriptionController,'unsubscribe'),
+          'permission_callback' =>  '__return_true',  
+        ),
+      )
+    );
+
+  }
 
 
   public function initRoutes(){
+   
     $this->subscribe();
+    $this->fetchSubscription();
+    $this->unsubscribe();
+
   }
 
   
