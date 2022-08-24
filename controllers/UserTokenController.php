@@ -35,5 +35,22 @@ class UserTokenController
 
   }
 
+  public function getEnabledExpoTokensByNotificationTypeID($request){
+
+    $notification_type_id = $request['notification_type_id'];
+    $results = $this->getEnabledExpoTokensByNotificationTypeIDHelper($notification_type_id);
+    return $results;  
+
+  }
+
+
+  public function getEnabledExpoTokensByNotificationTypeIDHelper($notification_type_id){
+
+    $results = $this->userTokenModel->getEnabledExpoTokensByNotificationTypeID($notification_type_id);
+
+    return $results;
+
+  }
+
 
 }

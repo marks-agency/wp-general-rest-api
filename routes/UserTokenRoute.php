@@ -55,10 +55,30 @@ class UserTokenRoute{
 
   }
 
+    /*
+  *
+  */
+
+  function getEnabledExpoTokensByNotificationTypeID(){
+    
+    register_rest_route(
+      $this->name, 
+      '/user/expo_token/notification_type_id/(?P<notification_type_id>[0-9]+)',
+      array(
+        array(
+          'methods'  => "GET",
+          'callback' => array(new UserTokenController,'getEnabledExpoTokensByNotificationTypeID'),
+          'permission_callback' =>  '__return_true',  
+        ),
+      )
+    );
+
+  }
+
   public function initRoutes(){
     $this->create();
     $this->delete();
-    
+    $this->getEnabledExpoTokensByNotificationTypeID(); 
   }
 
   

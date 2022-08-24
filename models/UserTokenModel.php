@@ -76,6 +76,21 @@ class UserTokenModel{
 
    }
 
+
+   public function getEnabledExpoTokensByNotificationTypeID($notification_type_id){
+        
+
+        global $wpdb;
+        
+        $results = $wpdb->get_results("SELECT expo_token FROM ".$wpdb->prefix."oi_markform_users_tokens mk_u_t INNER JOIN ".$wpdb->prefix."oi_markform_notification_subscription  mk_n_s ON 
+        mk_u_t.id = mk_n_s.user_token_id AND mk_n_s.enabled = 1 WHERE mk_n_s.notification_type_id = $notification_type_id
+        ",OBJECT);
+        
+        return  $results;
+  
+
+   }
+
   
    
  
