@@ -27,7 +27,7 @@ class NotificationModel{
   
    }
 
-   private function countNumberOfBreafingByID(){
+   public function countNumberNotification(){
         global $wpdb;
         $result = $wpdb->get_results("SELECT count(*) as ChildCount FROM ".$wpdb->prefix."oi_markform_notification ");
         return $result[0]->ChildCount;

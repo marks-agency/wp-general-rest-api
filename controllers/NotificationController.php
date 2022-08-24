@@ -19,14 +19,26 @@ class NotificationController
   public function notificationPagination($request)
   {
     $page_number = $request['page_number'];
+    $numberNotification = $this->notification->countNumberNotification();
 
     $page =  $page_number;
     $numberOfRecordsPerPage = 10;
     $offset  = ($page - 1) * $numberOfRecordsPerPage;
 
-    $result = $this->notification->notificationPagination($offset, $numberOfRecordsPerPage);
+    $notifications = $this->notification->notificationPagination($offset, $numberOfRecordsPerPage);
     
-    return rest_ensure_response($result);
+    $info = [];
+    $info["count"] = $numberNotification;
+    $info["pages"] = ceil($numberNotification/$numberOfRecordsPerPage);
+    
+    $results = [];
+
+    $results["info"] = $info;
+
+    $results["results"] = $notifications;
+
+    return rest_ensure_response($results);
+    
   }
 
 
