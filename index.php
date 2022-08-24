@@ -27,6 +27,7 @@ use Routes\PingRoute;
 use Routes\EntryRoute;
 use Routes\EntryMetaRoute;
 use Routes\UserTokenRoute;
+use Routes\NotificationRoute;
 use Routes\NotificationSubscriptionRoute;
 use Plugins\JWT\JWTPlugin;
 
@@ -48,7 +49,10 @@ function wp_general_rest_api_init(){
   (new EntryRoute($name_space))->initRoutes();
   (new EntryMetaRoute($name_space))->initRoutes();
   (new UserTokenRoute($name_space))->initRoutes();
+  (new NotificationRoute($name_space))->initRoutes();
   (new NotificationSubscriptionRoute($name_space))->initRoutes();
+
+  
 
   // pre hendler
   add_filter('rest_pre_dispatch',[new JWTPlugin,'validateTokenRestPreDispatch'],10,3);

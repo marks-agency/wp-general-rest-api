@@ -17,10 +17,10 @@ class NotificationTable{
     
     $sql = "CREATE TABLE IF NOT EXISTS ".$wpdb->prefix."oi_markform_notification(
         id BIGINT(20) NOT NULL AUTO_INCREMENT,
-        meta_value LONGTEXT NOT NULL,
-        created_at DATETIME NOT NULL,
         user_id BIGINT(20),
         notification_type_id BIGINT(20)  NOT NULL,
+        meta_value LONGTEXT NOT NULL,
+        created_at DATETIME NOT NULL,
         PRIMARY KEY(id),
         FOREIGN KEY(notification_type_id) REFERENCES ".$wpdb->prefix."oi_markform_notification_type(id) 
     )".$wpdb->get_charset_collate();  
