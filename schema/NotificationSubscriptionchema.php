@@ -1,7 +1,7 @@
 <?php 
 
 namespace Schema;
-
+use ExpoSDK\Expo;
 
 
 class NotificationSubscriptionchema{
@@ -41,7 +41,7 @@ class NotificationSubscriptionchema{
         'type'        => 'string',
         'validate_callback'=> function($value, $request, $key) {
   
-          return $this->checkIfIsExpoToken($value);
+          return (new Expo)->isExpoPushToken($value);
 
         }
       ),
