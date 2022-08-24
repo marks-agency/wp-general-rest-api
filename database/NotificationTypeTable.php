@@ -18,6 +18,7 @@ class NotificationTypeTable{
     $sql = "CREATE TABLE IF NOT EXISTS ".$wpdb->prefix."oi_markform_notification_type(
         id BIGINT(20) NOT NULL AUTO_INCREMENT,
         type VARCHAR(300) NOT NULL,
+        title VARCHAR(500) NOT NULL,
         text_message VARCHAR(500) NOT NULL,
         PRIMARY KEY(id),
         UNIQUE(type)
@@ -49,14 +50,17 @@ class NotificationTypeTable{
     $values = array(
       [
         "type"=>"breafing_filled",
+        "title"=>"Briefing preenchido",
         "text_message" =>"preencheu o briefing"
       ],
       [
         "type"=>"woocommerce_order",
+        "title"=>"Pedido feito",
         "text_message" =>"comprou"
       ],
       [
         "type"=>"deactivate_site",
+        "title"=>"Desativação de site",
         "text_message" =>"o site da foi desativado"
       ]
     );
