@@ -43,6 +43,32 @@ class PostController
 
   }
 
+  public function postPagination($request){
+    
+    $page = $request['page_number'];
+
+    $paginationInfo = $this->postModel->paginationInfo();
+    //;
+
+    $offset  = ($page - 1) *  $paginationInfo["number_of_records_per_page"];
+
+    $posts = $this->postModel->post($offset, $paginationInfo["number_of_records_per_page"]);
+
+
+    $info = [];
+    $info["count"] = $paginationInfo["total_of_rows"];
+    $info["pages"] = $paginationInfo["total_of_pages"];
+
+    $results = [];
+
+    $results["info"] = $info;
+
+    $results["results"] =  $posts;
+
+    return  rest_ensure_response($results);
+
+  }
+
   public function user($request)
   {
     //return rest_ensure_response($result);
