@@ -18,6 +18,7 @@
         }
     ],
     "require": {
-        "firebase/php-jwt": "^6.3"
+        "firebase/php-jwt": "^6.3",
+        "ctwillie/expo-server-sdk-php": "^2.0"
     }
 }
