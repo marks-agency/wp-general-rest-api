@@ -29,7 +29,27 @@ class NotificationRoute{
           'methods'  => 'GET',
           'callback' => array(new NotificationController,'notificationPagination'),
           'permission_callback' =>  '__return_true',  
-          'args' => (new PostSchema())->post(),
+        ),
+      )
+    );
+
+  }
+
+  /*
+  *
+  */
+
+  function notificationCreate(){
+    
+    register_rest_route(
+      $this->name, 
+      'notification',
+      array(
+        array(
+          'methods'  => 'POST',
+          'callback' => array(new NotificationController,'createNotification'),
+          'permission_callback' =>  '__return_true',  
+          //'args' => (new PostSchema())->post(),
         ),
       )
     );
@@ -39,6 +59,7 @@ class NotificationRoute{
 
   public function initRoutes(){
     $this->notificationPagination();
+    $this->notificationCreate();
   }
 
   

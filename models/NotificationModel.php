@@ -53,9 +53,9 @@ class NotificationModel{
           "meta_value" =>  maybe_serialize( $meta_value ),
           "created_at" =>  date("Y-m-d H:i:s")
      );
-     
+
      $results = $wpdb->insert(
-          $wpdb->prefix."oi_markform_notification_type",
+          $wpdb->prefix."oi_markform_notification",
           $item
      );
 

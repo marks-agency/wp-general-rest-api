@@ -41,6 +41,21 @@ class NotificationController
     
   }
 
+  public function createNotification($request){
+    
+    $user_id = $request["user_id"];
+    $notification_type_id = $request["notification_type_id"];
+    $meta_value = $request["meta_value"];
+
+    
+    $result = $this->notification->createNotification($notification_type_id, $meta_value, $user_id);
+
+    return rest_ensure_response($result);
+    
+  }
+
+
+
 
 
 
