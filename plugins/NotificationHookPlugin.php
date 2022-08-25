@@ -2,7 +2,7 @@
 
 namespace Plugins;
 
-
+use Plugins\NotificationPlugin ;
 
 class NotificationHookPlugin
 {
@@ -15,7 +15,11 @@ class NotificationHookPlugin
     *
     */
     public function briefingWasFilled($post_id,$user_id){
-        update_option( "Hook_opcao_nova_do_entrou_aqui", [ $post_id,$user_id]);
+        //update_option( "Hook_opcao_nova_do_entrou_aqui", [ $post_id,$user_id]);
+
+        $notificationPlugin = new NotificationPlugin();
+
+        $notificationPlugin->createNotificationForFilledBreafing([]); 
     }
 
 

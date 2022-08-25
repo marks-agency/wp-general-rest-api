@@ -32,7 +32,9 @@ use Routes\NotificationTypeRoute;
 use Routes\NotificationSubscriptionRoute;
 
 
+// pluguins
 use Plugins\JWT\JWTPlugin;
+use Plugins\NotificationHookPlugin;
 
 
 // DataBase
@@ -77,3 +79,5 @@ function oi_mark_api_rest_pre_dispatchi($url, $server, $request){}
 // Hooks 
 register_activation_hook(MARKFORM_PLUGIN_URL_REST_API, 'wp_general_rest_api_installer');
 add_action('rest_api_init','wp_general_rest_api_init');
+(new NotificationHookPlugin())->loadsHooks();
+

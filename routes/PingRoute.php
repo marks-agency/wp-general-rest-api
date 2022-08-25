@@ -2,7 +2,7 @@
 
 namespace Routes;
 
-use Plugins\Notification ;
+use Plugins\NotificationPlugin ;
 
 use WP_Error;
 
@@ -41,8 +41,9 @@ class PingRoute{
 
 
   public function pingFunc(){
-    $notification = new Notification();
-    $retsult = $notification->testFirstPushNotification();
+    $notification = new NotificationPlugin();
+    $retsult = "ok";
+    //$retsult = $notification->testFirstPushNotification();
 
     return rest_ensure_response(array(
         'ping'=>$retsult
