@@ -4,15 +4,17 @@ namespace Plugins;
 
 use ExpoSDK\Expo;
 use ExpoSDK\ExpoMessage;
-use Models\NotificationSubscriptionModel;
+use Models\UserTokenModel;
 
 Expo::addDevicesNotRegisteredHandler(function ($tokens) {
     // this callback is called once and receives an array of unregistered tokens
- 
-    $notificationSubscriptionModel = new NotificationSubscriptionModel();
+    
+    $userTokenModel = new UserTokenModel();
+    
     foreach ($tokens as $key => $value) {
-        $notificationSubscriptionModel->unsubscribeByUserTokenId($value);
+        $results = $userTokenModel->deleteUserTokenByExpoToken($value); 
     }
+    
 });
 
 class Notification
@@ -23,7 +25,7 @@ class Notification
         $message = (new ExpoMessage([
             'title' => 'initial title',
             'body' => 'initial body',
-            'to'  => 'ExponentPushToken[k2DLS2DgStFqCM9ttyCj7j]'
+            'to'  => 'ExponentPushToken[Rn1y4MFCv8uZ1tMqbcxuKl]'
         ]))
         ->setData(['id' => 1])
         ->setChannelId('default')

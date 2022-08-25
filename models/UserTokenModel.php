@@ -91,6 +91,16 @@ class UserTokenModel{
 
    }
 
+   public function deleteUserTokenByExpoToken($expoToken){
+
+        global $wpdb;
+        
+        $results = $wpdb->get_results("DELETE FROM ".$wpdb->prefix."oi_markform_users_tokens WHERE expo_token = '$expoToken' ", OBJECT);
+        
+        return  $results;
+
+   }
+
   
    
  
