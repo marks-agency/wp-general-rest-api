@@ -4,12 +4,14 @@ namespace Plugins;
 
 use ExpoSDK\Expo;
 use ExpoSDK\ExpoMessage;
+use Models\NotificationSubscriptionModel;
 
 Expo::addDevicesNotRegisteredHandler(function ($tokens) {
     // this callback is called once and receives an array of unregistered tokens
-    //update_option( "opcao_nova_do_claudio", $tokens);
+ 
+    $notificationSubscriptionModel = new NotificationSubscriptionModel();
     foreach ($tokens as $key => $value) {
-        # code... to delete token in database
+        $notificationSubscriptionModel->unsubscribeByUserTokenId($value);
     }
 });
 
