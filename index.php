@@ -28,7 +28,10 @@ use Routes\EntryRoute;
 use Routes\EntryMetaRoute;
 use Routes\UserTokenRoute;
 use Routes\NotificationRoute;
+use Routes\NotificationTypeRoute;
 use Routes\NotificationSubscriptionRoute;
+
+
 use Plugins\JWT\JWTPlugin;
 
 
@@ -50,6 +53,7 @@ function wp_general_rest_api_init(){
   (new EntryMetaRoute($name_space))->initRoutes();
   (new UserTokenRoute($name_space))->initRoutes();
   (new NotificationRoute($name_space))->initRoutes();
+  (new NotificationTypeRoute($name_space))->initRoutes();
   (new NotificationSubscriptionRoute($name_space))->initRoutes();
 
   

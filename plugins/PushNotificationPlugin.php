@@ -7,6 +7,7 @@ use ExpoSDK\ExpoMessage;
 use Models\UserTokenModel;
 use Models\NotificationModel;
 use Controllers\UserTokenController;
+use Controllers\NotificationTypeController;
 
 Expo::addDevicesNotRegisteredHandler(function ($tokens) {
     // this callback is called once and receives an array of unregistered tokens
@@ -36,16 +37,37 @@ class PushNotificationPlugin
         ->playSound();
         
         $expo = new Expo();
+        
         $response = $expo->send($message)->push();
         
-        //return $response->getData()[0]['status'];
+        return $response->getData()[0]['status'];
+
     }
 
-    public function sendPushNotification($notificationTypeID){
+    public function sendPushNotification($notificationTypeID, $body, $data = []){
         $userTokenController = new UserTokenController();
+        
+        $notificationTypeController = new NotificationTypeController();
+        $notificationType = $notificationTypeController->getNotificationTypeByIDHelper($notificationTypeID);
 
         $usersTokens = $userTokenController->getEnabledExpoTokensByNotificationTypeIDHelper($notificationTypeID);
-        $notificationType = 1;
+        
+        if(empty($usersTokens) || empty($notificationType)){
+            return ;
+        }
+
+        $title = $notificationType->title;
+        $textMessage = $notificationType->text_message;
+        $newBody = $body;
+
+        foreach ($usersTokens as $key => $value) {
+            
+            $exponentPushToken = $value->expo_token;
+            
+            $status = $this->generatePushNotificationForSingleExponentToken($title, $newBody, $exponentPushToken, $data);
+            
+
+        } 
     }
 
 }
