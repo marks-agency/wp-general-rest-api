@@ -27,6 +27,21 @@ class NotificationTypeModel{
   *
   */
 
+  public function getNotificationTypeByID($ID){
+       
+       global $wpdb;
+
+       $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."oi_markform_notification_type WHERE id = $ID ", OBJECT);
+     
+       if(empty($results)){
+          return null;
+       }
+
+       return $results[0];
+
+  }
+
+
   
 
   

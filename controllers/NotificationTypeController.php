@@ -2,10 +2,10 @@
 
 namespace Controllers;
 
-use Models\NotificationSubscriptionModel;
+use Models\NotificationTypeModel;
 
 use WP_Error;
-class NotificationSubscriptionController
+class NotificationTypeController
 {
   private $userTokenModel;
 
@@ -13,13 +13,32 @@ class NotificationSubscriptionController
 
   function __construct()
   {
-    $this->notificationSubscriptionModel = new NotificationSubscriptionModel();
+    $this->notificationTypeModel = new NotificationTypeModel();
   }
 
-  public function subscribeToAllPushNotifications($expo_token)
+  public function  getAllNotificatioType()
   {
-    $result = $this->notificationSubscriptionModel->subscribeToAllPushNotifications($expo_token);
+    $results = $this->notificationTypeModel->getAllNotificatioType();
+    return rest_ensure_response($results);
+  }
+
+  public function getNotificationTypeByID($request){
+
+    $ID = $request["id"];
+
+    $result = $this->getNotificationTypeByIDHelper($ID);
+    
     return rest_ensure_response($result);
+
+
+  }
+
+  public function getNotificationTypeByIDHelper($ID){
+
+    $result = $this->notificationTypeModel->getNotificationTypeByID($ID);
+    
+    return $result;
+
   }
 
 
