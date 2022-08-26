@@ -32,6 +32,8 @@ class UserModel{
 
         $userNumberOfPosts = $this->getNumberOfPostPerUserFromCurrentUser($user->ID);
 
+        $userAvatarUrl = get_avatar_url($user->ID);
+
         //$editable_roles = get_editable_roles();
         //wp_roles()->get_names()
 
@@ -41,8 +43,10 @@ class UserModel{
                 'display_name'  => $user->data->display_name,
                 'user_login' => $user->data->user_login,
                 'user_registered' =>  $user->data->user_registered,
+                'avatar_url' =>$userAvatarUrl,
                 'user_roles' =>  $userData->roles, 
-                'number_of_posts'  => $userNumberOfPosts,
+                'number_of_posts'  => $userNumberOfPosts
+                
         );
     
    }
