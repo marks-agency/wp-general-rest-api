@@ -9,6 +9,7 @@ class NotificationHookPlugin
 
     public function loadsHooks(){
         add_action('briefing_was_filled', [ $this, 'briefingWasFilled' ] , 2,2);
+        add_action('woocommerce_new_order', [ $this, 'woocommerceNewOrder' ] , 2,2);
     }
 
     /*
@@ -20,6 +21,15 @@ class NotificationHookPlugin
         $notificationPlugin = new NotificationPlugin();
 
         $notificationPlugin->createNotificationForFilledBreafing([]); 
+    }
+
+    public function woocommerceNewOrder( $order_id, $order){
+        
+        $items = $order->get_items();
+
+        $notificationPlugin = new NotificationPlugin();
+
+        $notificationPlugin->createNotificationForWoocommerceNewOrder($items); 
     }
 
 
