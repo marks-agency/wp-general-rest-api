@@ -42,6 +42,20 @@ class NotificationPlugin
         $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data);
     }
 
+    public function createNotificationDeactivationSite($data){
+        
+        $notificationModel = new NotificationModel();
+        $userID = 1;
+        $metaValue = $data;
+        $notificationTypeID = 3;
+        
+        $notificationModel->createNotification($notificationTypeID , $metaValue, $userID );
+        
+        $pushNotificationPlugin = new PushNotificationPlugin();
 
+        $body = "o site da de teste2 foi desativado";
+
+        $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data);
+    }
 
 }

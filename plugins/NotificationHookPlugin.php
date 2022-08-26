@@ -8,8 +8,9 @@ class NotificationHookPlugin
 {
 
     public function loadsHooks(){
-        add_action('briefing_was_filled', [ $this, 'briefingWasFilled' ] , 2,2);
-        add_action('woocommerce_new_order', [ $this, 'woocommerceNewOrder' ] , 2,2);
+        //add_action('briefing_was_filled', [ $this, 'briefingWasFilled' ] , 2,2);
+        //add_action('woocommerce_new_order', [ $this, 'woocommerceNewOrder' ] , 2,2);
+        //add_action('briefing_was_filled', [ $this, 'deactiveSite' ] , 2,2);
     }
 
     /*
@@ -30,6 +31,14 @@ class NotificationHookPlugin
         $notificationPlugin = new NotificationPlugin();
 
         $notificationPlugin->createNotificationForWoocommerceNewOrder($items); 
+    }
+
+
+    public function deactiveSite( $post_id,$user_id){
+        
+        $notificationPlugin = new NotificationPlugin();
+
+        $notificationPlugin->createNotificationDeactivationSite([]); 
     }
 
 

@@ -55,7 +55,7 @@ class NotificationTypeTable{
       ],
       [
         "type"=>"woocommerce_order",
-        "title"=>"Pedido feito",
+        "title"=>"Novo pedido",
         "text_message" =>"comprou"
       ],
       [
