@@ -9,10 +9,12 @@ class NotificationHookPlugin
 {
 
     public function loadsHooks(){
+        
         add_action('briefing_was_filled', [ $this, 'briefingWasFilled' ] , 2,2);
         add_action('woocommerce_new_order', [ $this, 'woocommerceNewOrder' ] , 2,2);
-        //add_action('briefing_was_filled', [ $this, 'deactiveSite' ] , 2,2);
-        //add_action('woocommerce_subscription_status_updated', [ $this, 'deactiveSite' ], 2, 3);
+        add_action('oi_mark_deactive_site', [ $this, 'deactiveSite' ] , 2,2);
+        add_action('woocommerce_order_status_changed', [ $this, 'PaymentReceived' ], 2, 3);
+        // add_action('woocommerce_subscription_status_updated', [ $this, 'PaymentReceived' ], 2, 3);
     }
 
     /*
@@ -105,11 +107,45 @@ class NotificationHookPlugin
     /*
     *
     */
-    public function PaymentReceived( $subscription,$new_status,$old_status){
+    public function PaymentReceived( $order_id, $old_status, $new_status){
+        
+        if (empty($order_id) || empty($old_status) || empty($new_status)){
+            return ;
+        }
+
+        if ($new_status != "on-hold"){
+            return ;
+        }
+
+        update_option("teste_envio_notificacoes", [$old_status,  $new_status] );
+
+        $order = wc_get_order( $order_id );
+
+        $userID = $order->get_user_id();
+
+        $notificationData = [];
+
+        $customerName = "cliente";
+        
+        if (!empty($userID)){
+            
+            $cliente =  get_user_by('ID',$userID);
+            if (!empty($userID)){
+                $customerName = $cliente->display_name;
+            }
+             
+        }
+
+        $notificationData["post_id"] = $order_id;
+        $notificationData["post_type"] = get_post_type( $order_id );
+        $notificationData["post_title"] = get_the_title( $order_id );
+        $notificationData["user_id"] = $userID;
+        $notificationData["customer_name"] = $customerName;
+
+        
         
         $notificationPlugin = new NotificationPlugin();
-
-        $notificationPlugin->createNotificationPaymentReceived([]); 
+        $notificationPlugin->createNotificationPaymentReceived($notificationData);  
     }
 
 

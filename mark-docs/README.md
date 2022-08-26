@@ -1,7 +1,7 @@
 # Models
-
+https://www.businessbloomer.com/woocommerce-easily-get-order-info-total-items-etc-from-order-object/
 ========================= hook assinatura pedido mudado =======================
-
+```
 add_action('woocommerce_subscription_status_updated', 'oi_mark_subscription_status_change_automate_woo', 10, 3);
  function oi_mark_subscription_status_change_automate_woo( $subscription,$new_status,$old_status) {
 	 //$oi_mark_parent_id = $subscription->data['parent_id'];
@@ -63,12 +63,12 @@ add_action('woocommerce_subscription_status_updated', 'oi_mark_subscription_stat
 	 restore_current_blog();
 	 
    } 
-
+ ```
 
 
 
    =====================  hook para ativar e dasativar site =====================
-
+```
    add_action('woocommerce_subscription_status_updated', 'oi_mark_subscription_status_change_general_action', 10, 3);
  function oi_mark_subscription_status_change_general_action( $subscription,$new_status,$old_status) {
 	 
@@ -132,10 +132,21 @@ function oi_mark_general_action_active_site_func($blog_id){
 	update_blog_status($blog_id, 'archived',0);
 	update_blog_status($blog_id, 'public', 1);
 }
-
+ ```
 ===================== push notification unicode =====================
 http://www.unicode.org/emoji/charts/full-emoji-list.html#1f604
 
 https://woocommerce.com/document/managing-orders/
 
 https://vwo.com/blog/best-push-notifications-tactics/
+
+gravity form
+
+
+$metaValueNotification = [] ;
+    $metaValueNotification["entry_id"] = $last_id;
+    $metaValueNotification["user_id"] = $user_id;
+    do_action('briefing_was_filled', $post_id, $metaValueNotification);
+
+=================== obter emojis ========================
+https://getemoji.com/

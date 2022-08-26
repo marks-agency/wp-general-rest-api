@@ -46,7 +46,8 @@ class PingRoute{
     //$retsult = $notification->testFirstPushNotification();
 
     return rest_ensure_response(array(
-        'ping'=>$retsult
+        'ping'=> get_the_title(121),
+        'pong' => get_post_type( 121 )
       ));
 
 

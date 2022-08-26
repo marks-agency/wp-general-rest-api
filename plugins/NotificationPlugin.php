@@ -28,7 +28,7 @@ class NotificationPlugin
         }
         
         //$overrideTitle="";
-        $overrideTitle = " Briefing prenchido 😃";
+        $overrideTitle = "📩 Briefing prenchido";
 
         $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data, $overrideTitle);
     }
@@ -53,7 +53,7 @@ class NotificationPlugin
         }
 
         //$overrideTitle="";
-        $overrideTitle = "Novo pedido #".$data["post_id"];
+        $overrideTitle = "Novo pedido: #".$data["post_id"];
 
         $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data,  $overrideTitle);
     }
@@ -69,25 +69,33 @@ class NotificationPlugin
         
         $pushNotificationPlugin = new PushNotificationPlugin();
 
-        $body = "o site da de teste2 foi desativado";
+        $body = "o site da de teste2 foi desativado ⚠️ 🚫 ⛔️";
 
         $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data);
     }
 
     public function createNotificationPaymentReceived($data){
         
+        $notificationTypeID = 2;
+
         $notificationModel = new NotificationModel();
-        $userID = 1;
-        $metaValue = $data;
-        $notificationTypeID = 4;
-        
-        $notificationModel->createNotification($notificationTypeID , $metaValue, $userID );
+
+        $notificationModel->createNotification($notificationTypeID , $data, $data["user_id"] );
         
         $pushNotificationPlugin = new PushNotificationPlugin();
 
-        $body = "o site da de teste2 foi desativado";
+        $body = "";
 
-        $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data);
+        if(!empty($data['customer_name'])){
+            $body = "Cliente ".$data['customer_name']." acabou de fazer pagamento 💵";
+        }else{
+            $body = "O pagamento do pedido acabou de ser realizado 💵";
+        }
+
+        //$overrideTitle="";
+        $overrideTitle = "💰 Pagamento do pedido: #".$data["post_id"];
+
+        $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data,  $overrideTitle);
     }
 
 }
