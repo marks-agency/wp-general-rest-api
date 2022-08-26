@@ -41,6 +41,8 @@ class UserModel{
                 'id'   => $user->ID,
                 'email'  => $user->data->user_email,
                 'display_name'  => $user->data->display_name,
+                'first_name' =>$user->user_firstname,
+                'last_name' =>$user->user_lastname,
                 'user_login' => $user->data->user_login,
                 'user_registered' =>  $user->data->user_registered,
                 'avatar_url' =>$userAvatarUrl,
