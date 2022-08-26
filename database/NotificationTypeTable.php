@@ -62,6 +62,11 @@ class NotificationTypeTable{
         "type"=>"deactivate_site",
         "title"=>"Desativação de site",
         "text_message" =>"o site da foi desativado"
+      ],
+      [
+        "type"=>"payment_received",
+        "title"=>"Pagamento recebido",
+        "text_message" =>"O Pagamento do pedido foi"
       ]
     );
 
