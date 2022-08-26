@@ -10,17 +10,20 @@ class NotificationPlugin
 {
 
     public function createNotificationForFilledBreafing($data){
-        
-        $notificationModel = new NotificationModel();
-        $userID = 1;
-        $metaValue = $data;
         $notificationTypeID = 1;
+        $notificationModel = new NotificationModel();
         
-        $notificationModel->createNotification($notificationTypeID , $metaValue, $userID );
+        $notificationModel->createNotification($notificationTypeID , $data, $data["user_id"] );
         
         $pushNotificationPlugin = new PushNotificationPlugin();
 
-        $body = "teu briefing acabou de ser preenchido";
+        $body = "";
+
+        if(!empty($data['customer_name'])){
+            $body = "O briefing ".$data["post_title"]. " foi preenchido por ".$data['customer_name'];
+        }else{
+            $body = "O briefing ".$data["post_title"]. " foi preenchido";
+        }
 
         $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data);
     }
@@ -48,6 +51,22 @@ class NotificationPlugin
         $userID = 1;
         $metaValue = $data;
         $notificationTypeID = 3;
+        
+        $notificationModel->createNotification($notificationTypeID , $metaValue, $userID );
+        
+        $pushNotificationPlugin = new PushNotificationPlugin();
+
+        $body = "o site da de teste2 foi desativado";
+
+        $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data);
+    }
+
+    public function createNotificationPaymentReceived($data){
+        
+        $notificationModel = new NotificationModel();
+        $userID = 1;
+        $metaValue = $data;
+        $notificationTypeID = 4;
         
         $notificationModel->createNotification($notificationTypeID , $metaValue, $userID );
         
