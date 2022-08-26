@@ -74,4 +74,16 @@ class PostController
     //return rest_ensure_response($result);
     return rest_ensure_response($this->userModel->user());
   }
+
+  /*
+  *
+  */
+  public function singlePost($request){
+    
+    $post_id = $request['post_id'];
+    $result = $this->postModel->getPostByID($post_id);
+    return  rest_ensure_response($result);
+
+  }
+
 }

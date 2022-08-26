@@ -65,5 +65,27 @@ class PostModel{
         $result["total_of_pages"] = $totalOfPages;
         
         return $result;
-   } 
+   }
+   
+   public function getPostByID($post_id){
+
+     $singlePost = wp_get_single_post($post_id);
+     $singlePostResponse = [];
+   
+     if(!empty($singlePost) && ($singlePost->post_type == 'markform')){
+          
+          $author =  get_user_by('ID', $singlePost->post_author);
+          
+          $singlePostResponse['id'] = $singlePost->ID;
+          $singlePostResponse['post_title'] = $singlePost->post_title;
+          $singlePostResponse['post_name'] = $singlePost->post_name;
+          $singlePostResponse['post_date'] = $singlePost->post_date;
+          $singlePostResponse['post_author_name'] = $author->display_name;
+          $singlePostResponse['perma_link'] =  get_permalink($singlePost->ID);
+          $singlePostResponse['number_of_chield'] =  $this->countNumberOfBreafingByID($singlePost->ID); 
+       
+     }
+   
+     return $singlePostResponse;
+   }
 }

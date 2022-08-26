@@ -55,10 +55,29 @@ class PostRoute{
 
   }
 
+  function getSinglePost(){
+    
+    register_rest_route(
+      $this->name, 
+      '/posts/(?P<post_id>[0-9]+)',
+      array(
+        array(
+          'methods'  => 'GET',
+          'callback' => array(new PostController,'singlePost'),
+          'permission_callback' =>  '__return_true',  
+          'args' => (new PostSchema())->post(),
+        ),
+  
+      )
+    );
+
+  }
+
 
   public function initRoutes(){
     $this->post();
     $this->postPagination();
+    $this->getSinglePost();
   }
 
   
