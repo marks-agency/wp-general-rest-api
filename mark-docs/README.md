@@ -132,3 +132,10 @@ function oi_mark_general_action_active_site_func($blog_id){
 	update_blog_status($blog_id, 'archived',0);
 	update_blog_status($blog_id, 'public', 1);
 }
+
+===================== push notification unicode =====================
+http://www.unicode.org/emoji/charts/full-emoji-list.html#1f604
+
+https://woocommerce.com/document/managing-orders/
+
+https://vwo.com/blog/best-push-notifications-tactics/

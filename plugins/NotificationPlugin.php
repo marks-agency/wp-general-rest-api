@@ -10,7 +10,9 @@ class NotificationPlugin
 {
 
     public function createNotificationForFilledBreafing($data){
+        
         $notificationTypeID = 1;
+
         $notificationModel = new NotificationModel();
         
         $notificationModel->createNotification($notificationTypeID , $data, $data["user_id"] );
@@ -24,25 +26,36 @@ class NotificationPlugin
         }else{
             $body = "O briefing ".$data["post_title"]. " foi preenchido";
         }
+        
+        //$overrideTitle="";
+        $overrideTitle = " Briefing prenchido 😃";
 
-        $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data);
+        $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data, $overrideTitle);
     }
 
 
     public function createNotificationForWoocommerceNewOrder($data){
         
-        $notificationModel = new NotificationModel();
-        $userID = 1;
-        $metaValue = $data;
         $notificationTypeID = 2;
-        
-        $notificationModel->createNotification($notificationTypeID , $metaValue, $userID );
+
+        $notificationModel = new NotificationModel();
+
+        $notificationModel->createNotification($notificationTypeID , $data, $data["user_id"] );
         
         $pushNotificationPlugin = new PushNotificationPlugin();
 
-        $body = "fulano de tal acabou de fazer um novo pedido";
+        $body = "";
 
-        $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data);
+        if(!empty($data['customer_name'])){
+            $body = "Cliente ".$data['customer_name']." acabou de fazer um novo pedido 😍";
+        }else{
+            $body = "Um novo pedido acabou se ser feito 😍";
+        }
+
+        //$overrideTitle="";
+        $overrideTitle = "Novo pedido #".$data["post_id"];
+
+        $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data,  $overrideTitle);
     }
 
     public function createNotificationDeactivationSite($data){

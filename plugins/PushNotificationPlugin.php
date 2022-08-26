@@ -44,7 +44,7 @@ class PushNotificationPlugin
 
     }
 
-    public function sendPushNotification($notificationTypeID, $body, $data = []){
+    public function sendPushNotification($notificationTypeID, $body, $data = [], $overrideTitle = ""){
         $userTokenController = new UserTokenController();
         
         $notificationTypeController = new NotificationTypeController();
@@ -57,6 +57,11 @@ class PushNotificationPlugin
         }
 
         $title = $notificationType->title;
+        
+        if (!empty($overrideTitle) && (strlen($overrideTitle) > 5)){
+            $title = $overrideTitle;
+        }
+        
         $textMessage = $notificationType->text_message;
         $newBody = $body;
 

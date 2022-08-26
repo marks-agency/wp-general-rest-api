@@ -10,7 +10,7 @@ class NotificationHookPlugin
 
     public function loadsHooks(){
         add_action('briefing_was_filled', [ $this, 'briefingWasFilled' ] , 2,2);
-        //add_action('woocommerce_new_order', [ $this, 'woocommerceNewOrder' ] , 2,2);
+        add_action('woocommerce_new_order', [ $this, 'woocommerceNewOrder' ] , 2,2);
         //add_action('briefing_was_filled', [ $this, 'deactiveSite' ] , 2,2);
         //add_action('woocommerce_subscription_status_updated', [ $this, 'deactiveSite' ], 2, 3);
     }
@@ -19,16 +19,12 @@ class NotificationHookPlugin
     *
     */
     public function briefingWasFilled($post_id, $metaValueNotification){
-        //update_option( "Hook_opcao_nova_do_entrou_aqui", [ $post_id,$user_id]);
 
         if (empty($post_id) || empty($metaValueNotification)){
             return ;
         }
 
-        $notificationPlugin = new NotificationPlugin();
         $postModel = new PostModel();
-
-        //$metaValueNotification[]
 
         $post = $postModel->getPostByID($post_id);
         
@@ -57,7 +53,7 @@ class NotificationHookPlugin
         $notificationData["user_id"] = $userID;
         $notificationData["customer_name"] = $customerName;
         
-
+        $notificationPlugin = new NotificationPlugin();
         $notificationPlugin->createNotificationForFilledBreafing($notificationData); 
     }
 
@@ -66,11 +62,34 @@ class NotificationHookPlugin
     */
     public function woocommerceNewOrder( $order_id, $order){
         
+        if (empty($order_id) || empty($order)){
+            return ;
+        }
+
         $items = $order->get_items();
+        $userID = $order->get_user_id();
 
+        $notificationData = [];
+
+        $customerName = "cliente";
+        
+        if (!empty($userID)){
+            
+            $cliente =  get_user_by('ID',$userID);
+            if (!empty($userID)){
+                $customerName = $cliente->display_name;
+            }
+             
+        }
+
+        $notificationData["post_id"] = $order_id;
+        $notificationData["post_type"] = get_post_type( $order_id );
+        $notificationData["post_title"] = get_the_title( $order_id );
+        $notificationData["user_id"] = $userID;
+        $notificationData["customer_name"] = $customerName;
+        
         $notificationPlugin = new NotificationPlugin();
-
-        $notificationPlugin->createNotificationForWoocommerceNewOrder($items); 
+        $notificationPlugin->createNotificationForWoocommerceNewOrder($notificationData); 
     }
 
     /*
