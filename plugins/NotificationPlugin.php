@@ -59,19 +59,30 @@ class NotificationPlugin
     }
 
     public function createNotificationDeactivationSite($data){
-        
-        $notificationModel = new NotificationModel();
-        $userID = 1;
-        $metaValue = $data;
+
         $notificationTypeID = 3;
-        
-        $notificationModel->createNotification($notificationTypeID , $metaValue, $userID );
+
+        $notificationModel = new NotificationModel();
+
+        $notificationModel->createNotification($notificationTypeID , $data, $data["user_id"] );
         
         $pushNotificationPlugin = new PushNotificationPlugin();
 
-        $body = "o site da de teste2 foi desativado ⚠️ 🚫 ⛔️";
+        $body = "";
 
-        $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data);
+        if(!empty($data['blogname'])){
+            $body = "O site ".$data['blogname']." foi desativado por falta de pagamento";
+        }else{
+            $body = "Um site acabou de ser desativado";
+        }
+
+        //$overrideTitle="";
+        $overrideTitle = "⛔️ Site desativado";
+
+        $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data,  $overrideTitle);
+
+        //$body = "o site da de teste2 foi desativado ⚠️ 🚫 ⛔️";
+
     }
 
     public function createNotificationPaymentReceived($data){

@@ -150,3 +150,6 @@ $metaValueNotification = [] ;
 
 =================== obter emojis ========================
 https://getemoji.com/
+
+==========================
+https://wordpress.stackexchange.com/questions/15309/how-to-get-blog-name-when-using-wordpress-multisite

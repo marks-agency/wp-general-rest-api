@@ -97,11 +97,52 @@ class NotificationHookPlugin
     /*
     *
     */
-    public function deactiveSite( $post_id,$user_id){
+    public function deactiveSite( $blog_id, $subscription_id){
+        
+        if (empty($blog_id) || empty($subscription_id)){
+
+            return ;
+        }
+    
+        $current_blog_details = get_blog_details( array( 'blog_id' => $blog_id ) );
+        $blogName = $current_blog_details->blogname;
+        $blogHome = $current_blog_details->home;
+        
+        switch_to_blog($blog_id);
+        
+        $adminEmail = get_bloginfo("admin_email");
+
+        restore_current_blog();
+
+        $user = get_user_by( 'email', $adminEmail );
+        
+
+        $userID = $user->ID;
+
+        $notificationData = [];
+
+        $customerName = "cliente";
+        
+        if (!empty($userID)){
+            
+            $cliente =  get_user_by('ID',$userID);
+            if (!empty($userID)){
+                $customerName = $cliente->display_name;
+            }
+             
+        }
+
+        $notificationData["post_id"] = $blog_id;
+        $notificationData["subscription_id"] = $subscription_id;
+        $notificationData["post_type"] = get_post_type( $blog_id );
+        $notificationData["post_title"] = get_the_title( $blog_id );
+        $notificationData["user_id"] = $userID;
+        $notificationData["customer_name"] = $customerName;
+        $notificationData["blogname"] = $blogHome;
+        $notificationData["bloghome"] = $blogName;
         
         $notificationPlugin = new NotificationPlugin();
-
-        $notificationPlugin->createNotificationDeactivationSite([]); 
+        $notificationPlugin->createNotificationDeactivationSite($notificationData); 
     }
 
     /*
