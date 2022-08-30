@@ -153,3 +153,5 @@ https://getemoji.com/
 
 ==========================
 https://wordpress.stackexchange.com/questions/15309/how-to-get-blog-name-when-using-wordpress-multisite
+
+//https://claudionhangapc.com/multsite_claudio/wp-json/wp-general-rest-api/v1

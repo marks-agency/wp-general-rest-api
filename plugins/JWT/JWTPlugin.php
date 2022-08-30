@@ -11,15 +11,14 @@ use Exception;
 
 class JWTPlugin
 {
-
+    //
+    const OI_MARK_WP_REST_APY_KEY = 'example_key';
 
     public function generateToken($id)
     {
 
         $issuedAt = time();
         $expire = $issuedAt + (MINUTE_IN_SECONDS * 777777);
-
-        $key = 'example_key';
 
         $payload = array(
             'iss' => get_bloginfo('url'),
@@ -28,7 +27,7 @@ class JWTPlugin
             'exp' => $expire,
         );
 
-        $jwt = JWT::encode($payload, $key, 'HS256');
+        $jwt = JWT::encode($payload, self::OI_MARK_WP_REST_APY_KEY, 'HS256');
 
         return $jwt;
     }
@@ -41,14 +40,13 @@ class JWTPlugin
 
         if (!empty($authorization)) {
 
-            $key = 'example_key';
             $splitAuthorization =  explode(' ', $authorization);
 
             if (count($splitAuthorization) == 2) {
                 try {
 
                     $jwt = $splitAuthorization[1];
-                    $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
+                    $decoded = JWT::decode($jwt, new Key(self::OI_MARK_WP_REST_APY_KEY, 'HS256'));
                     wp_set_current_user($decoded->id);
                     return $request;
                 } catch (Exception $e) {

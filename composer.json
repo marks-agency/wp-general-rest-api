@@ -2,13 +2,13 @@
     "name": "claud/wp-general-rest-api",
     "autoload": {
         "psr-4": {
-            "Routes\\": "Routes/",
-            "Controllers\\": "Controllers/",
-            "Models\\": "Models/",
-            "Schema\\": "Schema/",
-            "Plugins\\": "Plugins/",
-            "Plugins\\JWT\\": "Plugins/JWT/",
-            "Database\\": "Database/"
+            "Routes\\": "routes/",
+            "Controllers\\": "controllers/",
+            "Models\\": "models/",
+            "Schema\\": "schema/",
+            "Plugins\\": "plugins/",
+            "Plugins\\JWT\\": "plugins/JWT/",
+            "Database\\": "database/"
         }
     },
     "authors": [

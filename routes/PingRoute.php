@@ -44,17 +44,18 @@ class PingRoute{
     $notification = new NotificationPlugin();
     $retsult = "ok";
     //$retsult = $notification->testFirstPushNotification();
-    do_action('oi_mark_deactive_site', 2, 121);
+    //do_action('oi_mark_deactive_site', 2, 121);
     
-    switch_to_blog(2);
+    /*switch_to_blog(2);
       $site_title = get_bloginfo("admin_email");
 
-    restore_current_blog();
+    restore_current_blog();*/
 
     return rest_ensure_response(array(
-        'ping'=> get_the_title(121),
+        /*'ping'=> get_the_title(121),
         'pong' => get_post_type( 121 ),
-        'bog' =>  $site_title
+        'bog' =>  $site_title*/
+        'ping' => "pong"
       ));
 
 
