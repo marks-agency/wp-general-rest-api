@@ -17,9 +17,9 @@ class NotificationTypeTable{
     
     $sql = "CREATE TABLE IF NOT EXISTS ".$wpdb->prefix."oi_markform_notification_type(
         id BIGINT(20) NOT NULL AUTO_INCREMENT,
-        type VARCHAR(300) NOT NULL,
-        title VARCHAR(500) NOT NULL,
-        text_message VARCHAR(500) NOT NULL,
+        type VARCHAR(100) NOT NULL,
+        title VARCHAR(100) NOT NULL,
+        text_message VARCHAR(100) NOT NULL,
         PRIMARY KEY(id),
         UNIQUE(type)
     )".$wpdb->get_charset_collate();  
@@ -49,7 +49,7 @@ class NotificationTypeTable{
   public function getDefauleValues(){
     $values = array(
       [
-        "type"=>"breafing_filled",
+        "type"=>"briefing_filled",
         "title"=>"Briefing preenchido",
         "text_message" =>"preencheu o briefing"
       ],
@@ -59,15 +59,21 @@ class NotificationTypeTable{
         "text_message" =>"comprou"
       ],
       [
+        "type"=>"payment_received",
+        "title"=>"Pagamento recebido",
+        "text_message" =>"O Pagamento do pedido foi"
+      ],
+      [
         "type"=>"deactivate_site",
         "title"=>"Desativação de site",
         "text_message" =>"o site da foi desativado"
       ],
       [
-        "type"=>"payment_received",
-        "title"=>"Pagamento recebido",
-        "text_message" =>"O Pagamento do pedido foi"
+        "type"=>"deactivate_site_alert",
+        "title"=>"Alerta de desativação de site",
+        "text_message" =>"o site vai ser desativado"
       ]
+      
     );
 
     return  $values;

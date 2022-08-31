@@ -12,7 +12,7 @@ use Exception;
 class JWTPlugin
 {
     //
-    const OI_MARK_WP_REST_APY_KEY = 'example_key';
+    const OI_MARK_WP_REST_APY_KEY = 'g7q5UK5I*epzztjs64q5gI^3Km^0iJcz1QCq*%w@knYthghghghg';
 
     public function generateToken($id)
     {

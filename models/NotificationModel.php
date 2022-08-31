@@ -26,9 +26,11 @@ class NotificationModel{
         $newResults = [];
         
         foreach ($results as $key => $value) {
-          
+
           $newData = $value;
-          $newData->meta_value = maybe_unserialize( $value->meta_value );
+          $unserializeValue = maybe_unserialize( $value->meta_value );
+          $unserializeValue["avatar_url"] = get_avatar_url($value->user_id);
+          $newData->meta_value = $unserializeValue ; 
           $newResults[] =  $newData ;
         
           }

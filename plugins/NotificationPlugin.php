@@ -58,9 +58,34 @@ class NotificationPlugin
         $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data,  $overrideTitle);
     }
 
+    public function createNotificationPaymentReceived($data){
+        
+        $notificationTypeID = 3;
+
+        $notificationModel = new NotificationModel();
+
+        $notificationModel->createNotification($notificationTypeID , $data, $data["user_id"] );
+        
+        $pushNotificationPlugin = new PushNotificationPlugin();
+
+        $body = "";
+
+        if(!empty($data['customer_name'])){
+            $body = "Cliente ".$data['customer_name']." acabou de fazer pagamento 💵";
+        }else{
+            $body = "O pagamento do pedido acabou de ser realizado 💵";
+        }
+
+        //$overrideTitle="";
+        $overrideTitle = "💰 Pagamento do pedido: #".$data["post_id"];
+
+        $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data,  $overrideTitle);
+    }
+
+    
     public function createNotificationDeactivationSite($data){
 
-        $notificationTypeID = 3;
+        $notificationTypeID = 4;
 
         $notificationModel = new NotificationModel();
 
@@ -85,9 +110,9 @@ class NotificationPlugin
 
     }
 
-    public function createNotificationPaymentReceived($data){
-        
-        $notificationTypeID = 2;
+    public function createNotificationDeactivationSiteAlert($data){
+
+        $notificationTypeID = 5;
 
         $notificationModel = new NotificationModel();
 
@@ -97,16 +122,20 @@ class NotificationPlugin
 
         $body = "";
 
-        if(!empty($data['customer_name'])){
-            $body = "Cliente ".$data['customer_name']." acabou de fazer pagamento 💵";
+        if(!empty($data['blogname'])){
+            $body = "O site ".$data['blogname']." vai ser desativado daqui a 10 dias por falta de pagamento";
         }else{
-            $body = "O pagamento do pedido acabou de ser realizado 💵";
+            $body = "Um site acabou de ser desativado";
         }
 
         //$overrideTitle="";
-        $overrideTitle = "💰 Pagamento do pedido: #".$data["post_id"];
+        $overrideTitle = "⚠️ Desativação de site";
 
         $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data,  $overrideTitle);
+
+        //$body = "o site da de teste2 foi desativado ⚠️ 🚫 ⛔️";
+
     }
+
 
 }
