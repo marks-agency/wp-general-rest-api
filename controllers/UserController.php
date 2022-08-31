@@ -34,10 +34,10 @@ class UserController
 
     $userData = get_userdata( $user->ID);
 
-    if ( !in_array( 'administrator',$userData->roles, true ) ) {
+    /*if ( !in_array( 'administrator',$userData->roles, true ) ) {
       // Do something.
       return new WP_Error( 'rest_forbidden', esc_html__( 'OMG you can not view private data.', 'my-text-domain' ), array( 'status' => 401 ) );
-    }
+    }*/
 
     $token = $this->JWTPlugin->generateToken($user->data->ID);
 
