@@ -68,6 +68,22 @@ class NotificationHookPlugin
         if (empty($order_id) || empty($order)){
             return ;
         }
+        
+        if ( ! is_a( $order, 'WC_Abstract_Order' ) ) {
+            $order = wc_get_order( $order );
+        }
+    
+        $related_subscriptions = wcs_get_subscriptions_for_renewal_order( $order );
+    
+        if ( wcs_is_order( $order ) && ! empty( $related_subscriptions ) ) {
+            $is_renewal = true;
+        } else {
+            $is_renewal = false;
+        }
+        
+        if($is_renewal){
+            return ;
+        } 
 
         $items = $order->get_items();
         $userID = $order->get_user_id();
