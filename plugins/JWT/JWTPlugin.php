@@ -46,7 +46,7 @@ class JWTPlugin
                 try {
 
                     $jwt = $splitAuthorization[1];
-                    $decoded = JWT::decode($jwt, new Key(self::OI_MARK_WP_REST_APY_KEY, 'HS256'));
+                    $decoded = JWT::decode($jwt, self::OI_MARK_WP_REST_APY_KEY, array("HS256"));
                     wp_set_current_user($decoded->id);
                     return $request;
                 } catch (Exception $e) {
