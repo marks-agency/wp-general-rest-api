@@ -45,7 +45,12 @@ class NotificationHookPlugin
             
             $cliente =  get_user_by('ID',$userID);
             if (!empty($userID)){
+                
                 $customerName = $cliente->display_name;
+                
+                if (!empty($cliente->user_firstname) &&!empty($cliente->user_lastname)){
+                    $customerName =  $cliente->user_firstname." ".$cliente->user_lastname;
+                } 
             }
              
         }
@@ -97,6 +102,10 @@ class NotificationHookPlugin
             $cliente =  get_user_by('ID',$userID);
             if (!empty($userID)){
                 $customerName = $cliente->display_name;
+                
+                if (!empty($cliente->user_firstname) &&!empty($cliente->user_lastname)){
+                    $customerName =  $cliente->user_firstname." ".$cliente->user_lastname;
+                } 
             }
              
         }
@@ -136,7 +145,12 @@ class NotificationHookPlugin
             
             $cliente =  get_user_by('ID',$userID);
             if (!empty($userID)){
+                
                 $customerName = $cliente->display_name;
+
+                if (!empty($cliente->user_firstname) &&!empty($cliente->user_lastname)){
+                    $customerName =  $cliente->user_firstname." ".$cliente->user_lastname;
+                } 
             }
              
         }
@@ -184,7 +198,12 @@ class NotificationHookPlugin
             
             $cliente =  get_user_by('ID',$userID);
             if (!empty($userID)){
+                
                 $customerName = $cliente->display_name;
+                
+                if (!empty($cliente->user_firstname) &&!empty($cliente->user_lastname)){
+                    $customerName =  $cliente->user_firstname." ".$cliente->user_lastname;
+                } 
             }
              
         }
@@ -235,7 +254,12 @@ class NotificationHookPlugin
             
             $cliente =  get_user_by('ID',$userID);
             if (!empty($userID)){
+                
                 $customerName = $cliente->display_name;
+                
+                if (!empty($cliente->user_firstname) &&!empty($cliente->user_lastname)){
+                    $customerName =  $cliente->user_firstname." ".$cliente->user_lastname;
+                } 
             }
              
         }
