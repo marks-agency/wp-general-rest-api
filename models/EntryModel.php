@@ -105,6 +105,7 @@ class EntryModel{
 
      $userInfo["user_name"] =  $user->display_name;
      $userInfo["user_email"] =  $user->user_email;
+     $userInfo["avatar_url"] =  get_avatar_url($id);
 
      return  $userInfo;
 
