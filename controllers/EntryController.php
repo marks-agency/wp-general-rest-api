@@ -61,6 +61,14 @@ class EntryController
     return  rest_ensure_response($results);
   }
 
+  public function entryByID($request){
+    $entry_id = $request['entry_id'];
+
+    $entry =  $this->entryModel->entryByID($entry_id);
+
+    return  rest_ensure_response($entry);
+  }
+
   public function user($request)
   {
     //return rest_ensure_response($result);

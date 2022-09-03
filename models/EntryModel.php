@@ -111,4 +111,30 @@ class EntryModel{
 
    }
 
+
+   public function entryByID($id){
+     global $wpdb;
+     $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."oi_markform_entries  WHERE id = $id ",OBJECT);
+
+     $entries = [];
+
+     foreach($results as $key => $value){
+         
+          $entry = json_decode(json_encode($value), true);
+
+          $entry["user_data"] =  $this->getUserInfoByID($value->user_id);
+          $entry["post"] =  $this->getPostInfoById($value->form_id);
+
+          $entries[] = $entry;
+
+     }
+     
+     if(empty(!$entries[0])){
+          return $entries[0];
+     }
+
+     return  $entries;
+
+   }
+
 }
