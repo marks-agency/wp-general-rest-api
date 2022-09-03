@@ -60,6 +60,8 @@ class NotificationHookPlugin
         $notificationData["post_title"] = $post["post_title"];
         $notificationData["user_id"] = $userID;
         $notificationData["customer_name"] = $customerName;
+        $notificationData["entry_id"] = $metaValueNotification['entry_id'];
+        
         
         $notificationPlugin = new NotificationPlugin();
         $notificationPlugin->createNotificationForFilledBreafing($notificationData); 
