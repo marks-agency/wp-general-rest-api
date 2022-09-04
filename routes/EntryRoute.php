@@ -72,10 +72,30 @@ class EntryRoute{
   }
 
 
+  function searchEntryUser(){
+    
+    register_rest_route(
+      $this->name, 
+      '/entries/user/search/(?P<user_info>\S+)',
+      array(
+        array(
+          'methods'  => 'GET',
+          'callback' => array(new EntryController,'searchEntryUser'),
+          'permission_callback' =>  '__return_true',  
+          'args' => (new PostSchema())->post(),
+        ),
+  
+      )
+    );
+
+  }
+
+
   public function initRoutes(){
     $this->postEntry();
     $this->entryByID();
     $this->postEntryByIdPagination();
+    $this->searchEntryUser();
   }
 
   

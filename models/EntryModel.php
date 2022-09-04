@@ -137,4 +137,27 @@ class EntryModel{
 
    }
 
+   public function searchEntryUser($user_info,  $offset, $numberOfRecordsPerPage){
+
+     global $wpdb;
+     
+     $results = $wpdb->get_results("SELECT mke.id, mke.form_id, mke.user_id, mke.user_ip,  mke.created_at  FROM ".$wpdb->prefix."oi_markform_entries mke INNER JOIN ".$wpdb->prefix."users wpu ON  
+     mke.user_id = wpu.id WHERE wpu.user_login LIKE '%$user_info%' OR wpu.user_email LIKE '%$user_info%'  ORDER BY mke.id DESC LIMIT ".$offset.",".$numberOfRecordsPerPage,OBJECT); 
+     
+     $entries = [];
+
+     foreach($results as $key => $value){
+         
+          $entry = json_decode(json_encode($value), true);
+
+          $entry["user_data"] =  $this->getUserInfoByID($value->user_id);
+          $entry["post"] =  $this->getPostInfoById($value->form_id);
+
+          $entries[] = $entry;
+
+     }
+
+     return  $entries;
+   
+  }
 }

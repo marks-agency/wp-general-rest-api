@@ -74,4 +74,22 @@ class EntryController
     //return rest_ensure_response($result);
     return rest_ensure_response($this->userModel->user());
   }
+
+
+  public function searchEntryUser($request){
+
+    $user_info = $request['user_info'];
+    
+    $page_number = 1;
+
+    $page =  $page_number;
+    $numberOfRecordsPerPage = 10;
+    $offset  = ($page - 1) * $numberOfRecordsPerPage;
+
+    $entries = $this->entryModel->searchEntryUser($user_info, $offset, $numberOfRecordsPerPage);
+    
+    return  rest_ensure_response($entries);
+  
+  }
+  
 }
