@@ -34,6 +34,28 @@ class EntryMetaModel{
     
    }
 
+   public function searchEntryMetaAnswer($answer, $offset = 0, $numberOfRecordsPerPage = 20){
+    global $wpdb;
+    $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."oi_markform_entrymeta WHERE answer LIKE '%$answer%' LIMIT ".$offset.",".$numberOfRecordsPerPage,OBJECT);
+
+    $entriesMeta = [];
+
+    foreach($results as $key => $value){
+        
+         $entryMeta = json_decode(json_encode($value), true);
+
+         if($value->type=="questao_do_tipo_arquivo"){
+           $entryMeta["formated_answer"] =  $this->transformTypeFileAnswer($value);
+         }
+
+         $entriesMeta[] = $entryMeta; 
+    }
+
+    return  $entriesMeta;
+   
+  }
+
+
    private function transformTypeFileAnswer($value){
       $results = explode(',', $value->answer);
       $elements = [];

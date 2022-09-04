@@ -36,8 +36,31 @@ class EntryMetaRoute{
 
   }
 
+
+  /*
+  *
+  */
+  function searchEntryMetaAnswer(){
+    
+    register_rest_route(
+      $this->name, 
+      '/entrymeta/search/(?P<answer>\S+)',
+      array(
+        array(
+          'methods'  => 'GET',
+          'callback' => array(new EntryMetaController,'searchEntryMetaAnswer'),
+          'permission_callback' =>  '__return_true',  
+          'args' => (new PostSchema())->post(),
+        ),
+  
+      )
+    );
+
+  }
+
   public function initRoutes(){
     $this->entryMetaByEntryID();
+    $this->searchEntryMetaAnswer();
   }
 
   

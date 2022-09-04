@@ -28,4 +28,16 @@ class EntryMetaController
 
   }
 
+  public function searchEntryMetaAnswer($request)
+  {
+    
+    $answer = $request['answer'];
+
+    $results = $this->entryMetaModel->searchEntryMetaAnswer($answer);
+
+    return  rest_ensure_response($results);
+
+  }
+
+
 }
