@@ -86,4 +86,35 @@ class PostController
 
   }
 
+  /*
+  *
+  */
+  public function searchPost($request)
+  {
+    $page = 1;
+
+    $paginationInfo = $this->postModel->paginationInfo();
+    //;
+
+    $offset  = ($page - 1) *  $paginationInfo["number_of_records_per_page"];
+
+    $post_name = $request['post_name'];
+
+    $posts = $this->postModel->searchPost($post_name, $offset, $paginationInfo["number_of_records_per_page"]);
+
+
+    $info = [];
+    //$info["count"] = $paginationInfo["total_of_rows"];
+    //$info["pages"] = $paginationInfo["total_of_pages"];
+
+    $results = [];
+
+    $results["info"] = $info;
+
+    $results["results"] =  $posts;
+
+    return  rest_ensure_response($results);
+
+  }
+
 }

@@ -74,10 +74,30 @@ class PostRoute{
   }
 
 
+  function searchPost(){
+    
+    register_rest_route(
+      $this->name, 
+      '/posts/search/(?P<post_name>\S+)',
+      array(
+        array(
+          'methods'  => 'GET',
+          'callback' => array(new PostController,'searchPost'),
+          'permission_callback' =>  '__return_true',  
+          'args' => (new PostSchema())->post(),
+        ),
+  
+      )
+    );
+
+  }
+
+
   public function initRoutes(){
     $this->post();
     $this->postPagination();
     $this->getSinglePost();
+    $this->searchPost();
   }
 
   
