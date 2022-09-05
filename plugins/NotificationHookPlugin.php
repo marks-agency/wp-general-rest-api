@@ -80,17 +80,9 @@ class NotificationHookPlugin
             $order = wc_get_order( $order );
         }
     
-        $related_subscriptions = wcs_get_subscriptions_for_renewal_order( $order );
-    
-        if ( wcs_is_order( $order ) && ! empty( $related_subscriptions ) ) {
-            $is_renewal = true;
-        } else {
-            $is_renewal = false;
-        }
-        
-        if($is_renewal){
+        if(!empty($order->get_parent_id())){
             return ;
-        } 
+        }
 
         $items = $order->get_items();
         $userID = $order->get_user_id();

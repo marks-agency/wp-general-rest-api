@@ -123,7 +123,7 @@ class NotificationPlugin
         $body = "";
 
         if(!empty($data['blogname'])){
-            $body = "O site ".$data['blogname']." vai ser desativado daqui a 10 dias por falta de pagamento";
+            $body = "O site ".$data['blogname']." vai ser desativado daqui a 7 dias por falta de pagamento";
         }else{
             $body = "Um site acabou de ser desativado";
         }
