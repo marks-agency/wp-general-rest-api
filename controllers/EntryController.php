@@ -37,7 +37,7 @@ class EntryController
 
 
     $page =  $page_number;
-    $numberOfRecordsPerPage = 10;
+    $numberOfRecordsPerPage = 20;
     $offset  = ($page - 1) * $numberOfRecordsPerPage;
 
     $entries = $this->entryModel->postEntryByIdPagination($form_id, $offset, $numberOfRecordsPerPage);
@@ -83,7 +83,7 @@ class EntryController
     $page_number = 1;
 
     $page =  $page_number;
-    $numberOfRecordsPerPage = 10;
+    $numberOfRecordsPerPage = 20;
     $offset  = ($page - 1) * $numberOfRecordsPerPage;
 
     $entries = $this->entryModel->searchEntryUser($user_info, $offset, $numberOfRecordsPerPage);

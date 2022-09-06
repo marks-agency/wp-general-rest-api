@@ -55,7 +55,7 @@ class PostModel{
 
    public function paginationInfo(){
         
-        $numberOfRecordsPerPage = 10;
+        $numberOfRecordsPerPage = 20;
         $totalOfRows = wp_count_posts('markform')->publish;
         $totalOfPages = ceil($totalOfRows/$numberOfRecordsPerPage);
         //$offset  = ($page - 1) * $numberOfRecordsPerPage;

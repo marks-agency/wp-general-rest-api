@@ -62,7 +62,7 @@ class EntryModel{
         return $result[0]->ChildCount;
    }
 
-   public function paginationInfo($form_id, $numberOfRecordsPerPage = 10){
+   public function paginationInfo($form_id, $numberOfRecordsPerPage = 20){
         
         
         $totalOfRows = $this->countNumberOfBreafingByID($form_id);
