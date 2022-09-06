@@ -76,11 +76,7 @@ class NotificationHookPlugin
             return ;
         }
         
-        if ( ! is_a( $order, 'WC_Abstract_Order' ) ) {
-            $order = wc_get_order( $order );
-        }
-    
-        if(!empty($order->get_parent_id())){
+        if ( $this->checkifIsrenewal($order) ) {
             return ;
         }
 
@@ -269,6 +265,22 @@ class NotificationHookPlugin
         
         $notificationPlugin = new NotificationPlugin();
         $notificationPlugin->createNotificationDeactivationSiteAlert($notificationData); 
+    }
+
+    public function checkifIsrenewal($order){
+        if ( ! is_a( $order, 'WC_Abstract_Order' ) ) {
+            $order = \wc_get_order( $order );
+        }
+    
+        $related_subscriptions = \wcs_get_subscriptions_for_renewal_order( $order );
+    
+        if ( \wcs_is_order( $order ) && ! empty( $related_subscriptions ) ) {
+            $is_renewal = true;
+        } else {
+            $is_renewal = false;
+        }
+    
+       return $is_renewal;
     }
 
 
