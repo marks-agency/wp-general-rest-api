@@ -22,7 +22,7 @@ class NotificationController
     $numberNotification = $this->notification->countNumberNotification();
 
     $page =  $page_number;
-    $numberOfRecordsPerPage = 20;
+    $numberOfRecordsPerPage = 10;
     $offset  = ($page - 1) * $numberOfRecordsPerPage;
 
     $notifications = $this->notification->notificationPagination($offset, $numberOfRecordsPerPage);
