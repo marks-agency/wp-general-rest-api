@@ -76,7 +76,7 @@ class NotificationHookPlugin
             return ;
         }
         
-        if ( $this->checkifIsrenewal($order) ) {
+        if ( $this->checkifIsrenewal($order_id) ) {
             return ;
         }
 
