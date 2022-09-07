@@ -43,6 +43,10 @@ class EntryMetaModel{
     foreach($results as $key => $value){
         
          $entryMeta = json_decode(json_encode($value), true);
+         
+         if(!empty($value->audio)){
+          $entryMeta["audio"] =  $this->addUrlBase($value->audio);
+          }
 
          if($value->type=="questao_do_tipo_arquivo"){
            $entryMeta["formated_answer"] =  $this->transformTypeFileAnswer($value);
