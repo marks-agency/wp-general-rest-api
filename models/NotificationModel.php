@@ -65,5 +65,28 @@ class NotificationModel{
 
    }
 
+   public function notificationOrder($order_id){
+
+     $order = \wc_get_order( $order_id );
+
+     $order_info = [];
+     
+     if ( empty ( $order )){
+          return $order_info;
+     }
+     
+     $order_info["order_id"] =  $order_id;
+     $order_info["billing_email"] =  $order->get_billing_email();
+     $order_info["customer_name"] =  $order->get_billing_first_name().' '.$order->get_billing_last_name();
+     $order_info["billing_address"] =  $order->get_billing_address_1();
+     $order_info["billing_phone"] =  $order->get_billing_phone();
+     $order_info["order_status"] =  $order->get_status();
+     $order_info["payment_title"] =  $order->get_payment_method_title();
+     $order_info["date_created"] =  $order->get_date_created();
+     
+     return $order_info;
+
+   }
+
  
 }

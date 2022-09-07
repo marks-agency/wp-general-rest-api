@@ -55,8 +55,17 @@ class NotificationController
   }
 
 
+  /*
+  *
+  */
+  public function notificationOrder($request){
+    
+    $order_id = $request["order_id"];
 
+    $result = $this->notification->notificationOrder($order_id);
 
+    return rest_ensure_response($result);
+  }
 
 
 

@@ -56,10 +56,32 @@ class NotificationRoute{
 
   }
 
+  /*
+  *
+  */
+
+  function notificationOrder(){
+    
+    register_rest_route(
+      $this->name, 
+      'notification/order/(?P<order_id>[0-9]+)',
+      array(
+        array(
+          'methods'  => 'GET',
+          'callback' => array(new NotificationController,'notificationOrder'),
+          'permission_callback' =>  '__return_true',  
+          //'args' => (new PostSchema())->post(),
+        ),
+      )
+    );
+
+  }
+
 
   public function initRoutes(){
     $this->notificationPagination();
     $this->notificationCreate();
+    $this->notificationOrder();
   }
 
   
