@@ -78,7 +78,7 @@ class NotificationModel{
      $order_info["order_id"] =  $order_id;
      $order_info["billing_email"] =  $order->get_billing_email();
      $order_info["customer_name"] =  $order->get_billing_first_name().' '.$order->get_billing_last_name();
-     $order_info["billing_address"] =  $order->get_billing_address_1().', '.$order->get_shipping_city();
+     $order_info["billing_address"] =  $order->get_billing_address_1().', '.$order->get_billing_city().' - '.$order->get_billing_state();
      $order_info["billing_phone"] =  $order->get_billing_phone();
      $order_info["order_status"] =  $order->get_status();
      $order_info["payment_title"] =  $order->get_payment_method_title();
