@@ -88,5 +88,31 @@ class NotificationModel{
 
    }
 
+
+   public function notificationSite($site_id){
+
+     $blog_details = get_blog_details($site_id);
+
+     $site_info = [];
+     
+     if ( empty ($blog_details)){
+          return $site_info;
+     }
+     
+     $site_info['registered'] = $blog_details->registered;
+     $site_info['last_updated'] = $blog_details->last_updated;
+     $site_info['siteurl'] = $blog_details->siteurl;
+     if($blog_details->public ==1 && $blog_details->archived == 0){
+          $site_info['blog_status'] = "Ativado";
+     }elseif($blog_details->public ==0 && $blog_details->archived == 1){
+          $site_info['blog_status'] = "Arquivado";
+     }else{
+          $site_info['blog_status'] = "Desconhecido";
+     }  
+         
+     return $site_info;
+
+   }
+
  
 }

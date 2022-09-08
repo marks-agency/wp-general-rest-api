@@ -68,5 +68,18 @@ class NotificationController
   }
 
 
+  /*
+  *
+  */
+  public function notificationSite($request){
+    
+    $site_id = $request["site_id"];
+
+    $result = $this->notification->notificationSite($site_id);
+
+    return rest_ensure_response($result);
+  }
+
+
 
 }

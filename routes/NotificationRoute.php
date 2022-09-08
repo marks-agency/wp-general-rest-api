@@ -78,10 +78,30 @@ class NotificationRoute{
   }
 
 
+  function notificationSite(){
+    
+    register_rest_route(
+      $this->name, 
+      'notification/site/(?P<site_id>[0-9]+)',
+      array(
+        array(
+          'methods'  => 'GET',
+          'callback' => array(new NotificationController,'notificationSite'),
+          'permission_callback' =>  '__return_true',  
+          //'args' => (new PostSchema())->post(),
+        ),
+      )
+    );
+
+  }
+
+
   public function initRoutes(){
     $this->notificationPagination();
     $this->notificationCreate();
     $this->notificationOrder();
+    $this->notificationSite();
+    
   }
 
   
