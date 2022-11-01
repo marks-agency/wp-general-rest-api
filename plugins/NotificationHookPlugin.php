@@ -10,9 +10,9 @@ class NotificationHookPlugin
 
     public function loadsHooks(){
         
-        add_action('briefing_was_filled', [ $this, 'briefingWasFilled' ] , 2,2);
-        add_action('woocommerce_new_order', [ $this, 'woocommerceNewOrder' ] , 2,2);
-        add_action('woocommerce_order_status_changed', [ $this, 'PaymentReceived' ], 2, 3);
+        add_action('briefing_was_filled', [ $this, 'briefingWasFilled' ] , 99,2);
+        add_action('woocommerce_new_order', [ $this, 'woocommerceNewOrder' ] , 20,2);
+        add_action('woocommerce_order_status_changed', [ $this, 'PaymentReceived' ], 30, 3);
         add_action('oi_mark_deactive_site', [ $this, 'deactiveSite' ] , 2,2);
         add_action('oi_mark_deactive_site_alert', [ $this, 'deactiveSiteAlert' ] , 2,2);
         // add_action('woocommerce_subscription_status_updated', [ $this, 'PaymentReceived' ], 2, 3);
