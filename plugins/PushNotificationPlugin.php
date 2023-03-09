@@ -9,6 +9,8 @@ use Models\NotificationModel;
 use Controllers\UserTokenController;
 use Controllers\NotificationTypeController;
 
+use Exception;
+
 Expo::addDevicesNotRegisteredHandler(function ($tokens) {
     // this callback is called once and receives an array of unregistered tokens
     
@@ -42,6 +44,43 @@ class PushNotificationPlugin
         
         return $response->getData()[0]['status'];
 
+    }
+
+    public function sendGroupMessage($notificationTypeID, $body, $data = [], $overrideTitle = ""){
+        
+        
+        $notificationTypeController = new NotificationTypeController();
+        $notificationType = $notificationTypeController->getNotificationTypeByIDHelper($notificationTypeID);
+
+        $title = $notificationType->title;
+
+        $text = "*".$title."*\n\n" . $body;
+        
+        $postData = array(
+            'to' => '555181391215-1607993833',
+            'group' => true,
+            'text' => $text,
+        );
+
+        try{
+            // Setup cURL
+            $ch = curl_init('http://3.211.98.84:3000/send');
+            curl_setopt_array($ch, array(
+                CURLOPT_POST => TRUE,
+                CURLOPT_RETURNTRANSFER => TRUE,
+                CURLOPT_HTTPHEADER => array(
+                    'Content-Type: application/json'
+                ),
+                CURLOPT_POSTFIELDS => json_encode($postData)
+            ));
+            
+            // Send the request
+            $response = curl_exec($ch);
+
+        }catch (Exception $e){
+            $t = "";
+        }
+        
     }
 
     public function sendPushNotification($notificationTypeID, $body, $data = [], $overrideTitle = ""){

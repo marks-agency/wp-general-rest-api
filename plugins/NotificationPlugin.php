@@ -30,6 +30,7 @@ class NotificationPlugin
         //$overrideTitle="";
         $overrideTitle = "📩 Briefing prenchido";
 
+        $pushNotificationPlugin->sendGroupMessage($notificationTypeID, $body, $data, $overrideTitle);
         $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data, $overrideTitle);
     }
 
@@ -55,6 +56,7 @@ class NotificationPlugin
         //$overrideTitle="";
         $overrideTitle = "Novo pedido: #".$data["post_id"];
 
+        $pushNotificationPlugin->sendGroupMessage($notificationTypeID, $body, $data, $overrideTitle);
         $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data,  $overrideTitle);
     }
 
@@ -79,6 +81,7 @@ class NotificationPlugin
         //$overrideTitle="";
         $overrideTitle = "💰 Pagamento do pedido: #".$data["post_id"];
 
+        $pushNotificationPlugin->sendGroupMessage($notificationTypeID, $body, $data, $overrideTitle);
         $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data,  $overrideTitle);
     }
 
@@ -104,6 +107,7 @@ class NotificationPlugin
         //$overrideTitle="";
         $overrideTitle = "⛔️ Site desativado";
 
+        $pushNotificationPlugin->sendGroupMessage($notificationTypeID, $body, $data, $overrideTitle);
         $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data,  $overrideTitle);
 
         //$body = "o site da de teste2 foi desativado ⚠️ 🚫 ⛔️";
@@ -131,6 +135,7 @@ class NotificationPlugin
         //$overrideTitle="";
         $overrideTitle = "⚠️ Desativação de site";
 
+        $pushNotificationPlugin->sendGroupMessage($notificationTypeID, $body, $data, $overrideTitle);
         $pushNotificationPlugin->sendPushNotification($notificationTypeID, $body, $data,  $overrideTitle);
 
         //$body = "o site da de teste2 foi desativado ⚠️ 🚫 ⛔️";
